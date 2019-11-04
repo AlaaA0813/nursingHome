@@ -6,14 +6,15 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Home Page</title>
     </head>
+    <body>
+        <h1>Nursing Home Home Page</h1>
+        <h2>Log in to an existing account or register as a new user.</h2>
 
-    <h1>Nursing Home Home Page</h1>
-    <h2>Log in to an existing account or register as a new user.</h2>
-
-    <form action="">
-        <input type="submit" value="Go To Log In" />
-    </form>
-    <form action="">
-        <input type="submit" value="Go To Sign Up!" />
-    </form>
+        <form action="">
+            <input type="submit" value="Go To Log In" />
+        </form>
+        <form action="">
+            <input type="submit" value="Go To Sign Up!" />
+        </form>
+    </body>
 </html>

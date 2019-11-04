@@ -6,14 +6,15 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Log In</title>
     </head>
+    <body>
+        <h1>Log In</h1>
+        <h2>Please provide account information.</h2>
 
-    <h1>Login In</h1>
-    <h2>Please provide account information.</h2>
-
-    <form action="" method="POST">
-        <label>Email</label><input type="text" name="email" />
-        <label>Password</label><input type="text" name="password" />
-        <input type="submit" name="logIn" value="Log In" />
-        <input type="submit" name="cancel" value="Cancel" />
-    </form>
+        <form action="" method="POST">
+            <label>Email</label><input type="text" name="email" />
+            <label>Password</label><input type="text" name="password" />
+            <input type="submit" name="logIn" value="Log In" />
+            <input type="submit" name="cancel" value="Cancel Login" />
+        </form>
+    </body>
 </html>
