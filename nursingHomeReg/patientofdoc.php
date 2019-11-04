@@ -25,7 +25,7 @@
                 <th>Comment</th>
                 <th>Morning Med</th>
                 <th>Afternoon Med</th>
-                <th>Night Med</th>
+                <th>Night Med</th>   
             </tr>
             </table>
             <br><input type="submit" name="OK" value="OK">
