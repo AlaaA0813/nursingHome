@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="styles.css" type="text/css" charset="utf-8">
         <title>Additional Information of Patient</title>
     </head>
     <h1>Additional Information of Patient</h1>
@@ -20,7 +21,8 @@
     <option value=""></option>
   </select>
   <br><br>
-  <input type="submit">
+  <br><input type="submit" name="Add" value="Add">
+  <input type="submit" name="cancel" value="Cancel">
 
     </form>
 
