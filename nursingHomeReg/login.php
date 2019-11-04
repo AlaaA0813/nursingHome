@@ -7,7 +7,7 @@
         <title>Log In</title>
     </head>
     <body>
-        <h1>Login In</h1>
+        <h1>Log In</h1>
         <h2>Please provide account information.</h2>
 
         <form action="" method="POST">

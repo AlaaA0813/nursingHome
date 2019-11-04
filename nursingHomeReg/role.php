@@ -7,8 +7,18 @@
         <title>Roles</title>
     </head>
     <body>
+        <h1>Current Employee Roles</h1>
+        <table>
+            <tr>
+                <th>Role</th>
+                <th>Access Level</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
         <form action="" method="POST">
-            <h2>Roles</h2>
             <label>New Role: </label><input type="text" name="newrole" /><br>
             <label>Access Level: </label><input type="text" name="accesslevel" /><br>
             <input type="submit" name="addrole" value="Add New Role">
