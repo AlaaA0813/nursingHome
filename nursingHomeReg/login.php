@@ -12,8 +12,8 @@
         <h2>Please provide account information.</h2>
 
         <form action="" method="POST">
-            <label>Email</label><input type="text" name="email" />
-            <label>Password</label><input type="text" name="password" />
+            <label>Email: </label><input type="text" name="email" />
+            <label>Password: </label><input type="text" name="password" />
             <input type="submit" name="logIn" value="Log In" />
             <input type="submit" name="cancel" value="Cancel Login" />
         </form>

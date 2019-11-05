@@ -12,24 +12,34 @@
         <p>Add a search option for each attribute</p>
         <form action="" method="POST">
             <table>
-            <tr>
-                <th>Name</th>
-                <th>Date</th>
-                <th>Comment</th>
-                <th>Morning Med</th>
-                <th>Afternoon Med</th>
-                <th>Night Med</th>
-            </tr>
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Comment</th>
+                    <th>Morning Med</th>
+                    <th>Afternoon Med</th>
+                    <th>Night Med</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>  
+                </tr>
             </table>
-            <label>Appointment</label>
-            <input type="text" name="Till Date" />
+            <label>Appointment: </label><input type="text" name="tilldate" placeholder="Till Date" />
             <table>
-            <tr>
-                <th>Patient</th>
-                <th>Date</th>
-            </tr>
-            </table>
-           
+                <tr>
+                    <th>Patient</th>
+                    <th>Date</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>  
         </form>
     </body>
 </html>

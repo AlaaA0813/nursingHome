@@ -8,22 +8,24 @@
         <link rel="stylesheet" href="styles.css" type="text/css" charset="utf-8">
         <title>Additional Information of Patient</title>
     </head>
-    <h1>Additional Information of Patient</h1>
-    <form action="" method="POST">
-        <br><label>Patient ID</label><input type="text" name="Patient ID" /><br>
-        <br><label>Group</label><input type="text" name="Group" /><br>
-        <br> <label>Admission Date</label><input type="text" name="Admission Date" /><br>
-        <br> <label>Date</label><input type="text" name="Date" /><br>
-        <br> <label>Doctor</label>  <select name="DOCTORDROPDOWN"><br>
-    <option value=""></option>
-    <option value=""></option>
-    <option value=""></option>
-    <option value=""></option>
-  </select>
-  <br><br>
-  <br><input type="submit" name="Add" value="Add">
-  <input type="submit" name="cancel" value="Cancel">
-
-    </form>
+    <body>
+        <h1>Additional Information of Patient</h1>
+        <form action="" method="POST">
+            <label>Patient ID: </label><input type="text" name="patientID" /><br>
+            <label>Group: </label><input type="text" name="group" /><br>
+            <label>Admission Date: </label><input type="text" name="admissionDate" /><br>
+            <label>Date: </label><input type="text" name="date" /><br>
+            <label>Doctor: </label>
+            <select name="DOCTORDROPDOWN">
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+            </select><br>
+            <input type="submit" name="ok" value="OK">
+            <input type="submit" name="cancel" value="Cancel">
+        </form>
+    </body>
+</html>
 
     

@@ -13,12 +13,16 @@
             <tr>
                 <th>Role</th>
                 <th>Access Level</th>
-
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
         </table>
         <form action="" method="POST">
             <label>New Role: </label><input type="text" name="newrole" /><br>
             <label>Access Level: </label><input type="text" name="accesslevel" /><br>
-            <input type="submit" name="addrole" value="Add New Role">
+            <input type="submit" name="addNewRole" value="Add New Role">
             <input type="submit" name="cancel" value="Cancel">
         </form>
     </body>

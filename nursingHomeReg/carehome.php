@@ -10,19 +10,28 @@
     <body>
         <h1>Cavegiver's Home</h1>
         <form action="" method="POST">
-        <label>List of Patients duty today</label>
+            <label>List of Patients duty today</label>
             <table>
-            <tr>
-                <th>Name</th>
-                <th>Room</th>
-                <th>Morning Medicine</th>
-                <th>Afternoon Medicine</th>
-                <th>Night Medicine</th>
-                <th>Breakfast</th>
-                <th>Lunch</th>
-                <th>Dinner</th>
-                <h1>ADD CHECK BOXES</h1>
-            </tr>
+                <tr>
+                    <th>Name</th>
+                    <th>Room</th>
+                    <th>Morning Medicine</th>
+                    <th>Afternoon Medicine</th>
+                    <th>Night Medicine</th>
+                    <th>Breakfast</th>
+                    <th>Lunch</th>
+                    <th>Dinner</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><input type="checkbox" name="morningMed" /></td>
+                    <td><input type="checkbox" name="afternoonMed" /></td>
+                    <td><input type="checkbox" name="nightMed" /></td>
+                    <td><input type="checkbox" name="breakfast" /></td>
+                    <td><input type="checkbox" name="lunch" /></td>
+                    <td><input type="checkbox" name="dinner" /></td>
+                </tr>
             </table>
         </form>
     </body>
