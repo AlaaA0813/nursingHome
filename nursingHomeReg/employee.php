@@ -18,6 +18,16 @@
                 <th>Salary</th>
                 <th>Group</th>
             </tr>
+            <form action="" method="POST">
+                <input type="submit" name="search" value="Search">
+                <tr>
+                    <td><input type="text" name="ID" /></td>
+                    <td><input type="text" name="name" /></td>
+                    <td><input type="text" name="role" /></td>
+                    <td><input type="text" name="salary" /></td>
+                    <td><input type="text" name="group" /></td>
+                </tr>
+            </form>
             <tr>
                 <td></td>
                 <td></td>

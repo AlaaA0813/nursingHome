@@ -11,19 +11,20 @@
     <body>
         <h1>Registration Approval</h1>
         <form action="" method="POST">
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Role</th>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
-        <input type="checkbox" name="yes" value="Yes" /> Yes
-        <input type="checkbox" name="no" value="No" /> No <br>
-        <input type="submit" name="approveCancelation" value="Approve Cancellation">
-        <input type="submit" name="cancel" value="Cancel">
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Approved</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Yes<input type="checkbox" name="yes" value="Yes" />No<input type="checkbox" name="no" value="No" /></td>
+                </tr>
+            </table>
+            <input type="submit" name="approveCancelation" value="Approve Cancellation">
+            <input type="submit" name="cancel" value="Cancel">
+        </form>
     </body>
 </html>

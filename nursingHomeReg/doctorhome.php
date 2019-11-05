@@ -20,6 +20,15 @@
                     <th>Afternoon Med</th>
                     <th>Night Med</th>
                 </tr>
+                <input type="submit" name="search" value="Search">
+                <tr>
+                    <td><input type="text" name="name" /></td>
+                    <td><input type="text" name="date" /></td>
+                    <td><input type="text" name="comment" /></td>
+                    <td><input type="text" name="morningMed" /></td>
+                    <td><input type="text" name="afternoonMed" /></td>
+                    <td><input type="text" name="nightMed" /></td>
+                </tr>
                 <tr>
                     <td></td>
                     <td></td>
@@ -29,7 +38,9 @@
                     <td></td>  
                 </tr>
             </table>
-            <label>Appointment: </label><input type="text" name="tilldate" placeholder="Till Date" />
+        </form>
+        <form action="" method="POST">
+            <label>Appointment: </label><input type="text" name="tilldate" placeholder="Till Date" /><input type="submit" name="searchAppt" value="Search">
             <table>
                 <tr>
                     <th>Patient</th>
@@ -39,7 +50,7 @@
                     <td></td>
                     <td></td>
                 </tr>
-            </table>  
+            </table>
         </form>
     </body>
 </html>
