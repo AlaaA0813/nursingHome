@@ -20,10 +20,10 @@
                 <tr>
                     <td></td>
                     <td></td>
-                    <td>Yes<input type="checkbox" name="yes" value="Yes" />No<input type="checkbox" name="no" value="No" /></td>
+                    <td><label>Yes</label><input type="checkbox" name="yes" /><label>No</label><input type="checkbox" name="no" /></td>
                 </tr>
             </table>
-            <input type="submit" name="approveCancelation" value="Approve Cancellation">
+            <input type="submit" name="approveCancellation" value="Approve Cancellation">
             <input type="submit" name="cancel" value="Cancel">
         </form>
     </body>

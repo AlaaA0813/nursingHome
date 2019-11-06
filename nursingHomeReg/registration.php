@@ -28,7 +28,6 @@
             <label>Family Code (For Patient Family Member): </label><input type="text" name="familycode" /><br>
             <label>Emergency Contact: </label><input type="text" name="econtact" /><br>
             <label>Relation to Emergency Contact: </label><input type="text" name="familyrelation" /><br>
-
             <input type="submit" name="register" value="Register Me">
             <input type="submit" name="cancel" value="Cancel Registration">
         </form>
