@@ -1,36 +1,36 @@
 <?php 
-//let the script keep running (with a warning) if the file is missing.
+// connect to the DB
 include_once 'db.php';
-// checks connection and if failed or not.
+// checks connection, othewrise stop running script and throw error.
 if (!$conn) {
     die("Connection failed: " . mysqli_eeror());
 }
 
 // check whether REGISTRATION variables are set or not
-//isset() function return false if testing variable contains a NULL value
+// isset() function return false if testing variable contains a NULL value
 if (isset($_POST['register'])) {
-    //if registration 
     $role = $_POST['role'];
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $phonenumber = $_POST['phonenumber'];
-    $dob = $_POST['dob'];    
-    // if family role is selected, the following variables will be available
+    $dob = $_POST['dob'];
+
+    // if family role is selected, the following variables will be set
     $familycode = $_POST['familycode'];
     $econtact = $_POST['econtact'];
     $familyrelation = $_POST['familyrelation'];
   
-    // if inputs are not empty insert this data
+    // if inputs are not empty insert this data into the DB
     if (($role != '') && ($firstname != '') && ($lastname != '') && ($email != '') && ($password != '') && ($phonenumber != '') && ($dob != '') && ($familycode != '') && ($econtact != '') && ($familyrelation != '')) {
-        // insert query, inserts all data in columns
+        // insert query, inserts all data into each columns
         $insertQuery = "INSERT INTO Users (role, firstname, lastname, email, password, phonenumber, dob, familycode, econtact, familyrelation) VALUES ('$role', '$firstname', '$lastname', '$email', '$password', '$phonenumber', '$dob', '$familycode', '$econtact','$familyrelation')";
         // if query succesfully runs, notify user 
         if (mysqli_query($conn, $insertQuery)) {
             echo "Congratulations, you have registered!";
         }
-        // if query fails to run, stop running script and notify user
+        // if query fails to run, notify user
         else {
             echo " Error with registering." . mysqli_error($conn);
         }
