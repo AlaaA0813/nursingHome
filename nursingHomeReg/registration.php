@@ -8,7 +8,6 @@ if (!$conn) {
 
 // check whether REGISTRATION variables are set or not
 //isset() function return false if testing variable contains a NULL value
-
 if (isset($_POST['register'])) {
     //if registration 
     $role = $_POST['role'];
@@ -18,31 +17,27 @@ if (isset($_POST['register'])) {
     $password = $_POST['password'];
     $phonenumber = $_POST['phonenumber'];
     $dob = $_POST['dob'];    
-    //if family role  is selected then:
+    // if family role is selected, the following variables will be available
     $familycode = $_POST['familycode'];
     $econtact = $_POST['econtact'];
     $familyrelation = $_POST['familyrelation'];
   
-
-    // if inputs are available insert this data
-  
+    // if inputs are not empty insert this data
     if (($role != '') && ($firstname != '') && ($lastname != '') && ($email != '') && ($password != '') && ($phonenumber != '') && ($dob != '') && ($familycode != '') && ($econtact != '') && ($familyrelation != '')) {
-        //insert query, inserts all data in columns 
-        //MIGHT CHANGE USERS TO EMPLOYEE NOT SURE ask MASTER ALAA
+        // insert query, inserts all data in columns
         $insertQuery = "INSERT INTO Users (role, firstname, lastname, email, password, phonenumber, dob, familycode, econtact, familyrelation) VALUES ('$role', '$firstname', '$lastname', '$email', '$password', '$phonenumber', '$dob', '$familycode', '$econtact','$familyrelation')";
-       
-      
-
-        //IF USER HAS BEEN CREATED 
+        // if query succesfully runs, notify user 
         if (mysqli_query($conn, $insertQuery)) {
             echo "Congratulations, you have registered!";
         }
+        // if query fails to run, stop running script and notify user
         else {
             echo " Error with registering." . mysqli_error($conn);
         }
     }
 }
-//THEN CLOSE CONNECTION
+
+// close connection
 mysqli_close($conn)
 
 ?>
