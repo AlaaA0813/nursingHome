@@ -29,7 +29,7 @@ if (isset($_POST['register'])) {
     if (($role != '') && ($firstname != '') && ($lastname != '') && ($email != '') && ($password != '') && ($phoneNumber != '') && ($dob != '') && ($familycode != '') && ($econtact != '') && ($familyrelation != '')) {
         //insert query, inserts all data in columns 
         //MIGHT CHANGE USERS TO EMPLOYEE NOT SURE ask MASTER ALAA
-        $insertQuery = "INSERT INTO users (role, firstname, lastname, email, password, phonenumber, dob, familycode, econtact, familyrelation) VALUES ('$id', '$role', '$firstname', '$lastname', '$email', '$password', '$phoneNumber', '$dob', '$familycode', '$econtact','$familyrelation')";
+        $insertQuery = "INSERT INTO Users (role, firstname, lastname, email, password, phonenumber, dob, familycode, econtact, familyrelation) VALUES ('$id', '$role', '$firstname', '$lastname', '$email', '$password', '$phoneNumber', '$dob', '$familycode', '$econtact','$familyrelation')";
        
       
 
