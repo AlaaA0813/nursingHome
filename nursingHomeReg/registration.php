@@ -26,10 +26,10 @@ if (isset($_POST['register'])) {
 
     // if inputs are available insert this data
   
-    if (($role != '') && ($firstname != '') && ($lastname != '') && ($email != '') && ($password != '') && ($phoneNumber != '') && ($dob != '') && ($familycode != '') && ($econtact != '') && ($familyrelation != '')) {
+    if (($role != '') && ($firstname != '') && ($lastname != '') && ($email != '') && ($password != '') && ($phonenumber != '') && ($dob != '') && ($familycode != '') && ($econtact != '') && ($familyrelation != '')) {
         //insert query, inserts all data in columns 
         //MIGHT CHANGE USERS TO EMPLOYEE NOT SURE ask MASTER ALAA
-        $insertQuery = "INSERT INTO Users (role, firstname, lastname, email, password, phonenumber, dob, familycode, econtact, familyrelation) VALUES ('$id', '$role', '$firstname', '$lastname', '$email', '$password', '$phoneNumber', '$dob', '$familycode', '$econtact','$familyrelation')";
+        $insertQuery = "INSERT INTO Users (role, firstname, lastname, email, password, phonenumber, dob, familycode, econtact, familyrelation) VALUES ('$role', '$firstname', '$lastname', '$email', '$password', '$phonenumber', '$dob', '$familycode', '$econtact','$familyrelation')";
        
       
 
@@ -60,7 +60,7 @@ mysqli_close($conn)
         <form action="" method="POST">
             <h2>Register</h2>
             <label>Role</label>
-                <select>
+                <select name="role">
                     <option value="admin">Administrator</option>
                     <option value="supervisor">Supervisor</option>
                     <option value="doctor">Doctor</option>
