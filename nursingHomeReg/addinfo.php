@@ -14,14 +14,6 @@
             <label>Patient ID: </label><input type="text" name="patientID" /><br>
             <label>Group: </label><input type="text" name="group" /><br>
             <label>Admission Date: </label><input type="text" name="admissionDate" /><br>
-            <label>Date: </label><input type="text" name="date" /><br>
-            <label>Doctor: </label>
-            <select name="DOCTORDROPDOWN">
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-            </select><br>
             <input type="submit" name="ok" value="OK">
             <input type="submit" name="cancel" value="Cancel">
         </form>
