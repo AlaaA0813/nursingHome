@@ -23,7 +23,7 @@ if (isset($_POST['register'])) {
     $familyrelation = $_POST['familyrelation'];
   
     // if inputs are not empty insert this data into the DB
-    if (($role != '') && ($firstname != '') && ($lastname != '') && ($email != '') && ($password != '') && ($phonenumber != '') && ($dob != '') && ($familycode != '') && ($econtact != '') && ($familyrelation != '')) {
+    if (($role != '') && ($firstname != '') && ($lastname != '') && ($email != '') && ($password != '') && ($phonenumber != '') && ($dob != '') && ($familycode != '' || $familycode == '') && ($econtact != '') && ($familyrelation != '')) {
         // insert query, inserts all data into each columns
         $insertQuery = "INSERT INTO Users (role, firstname, lastname, email, password, phonenumber, dob, familycode, econtact, familyrelation) VALUES ('$role', '$firstname', '$lastname', '$email', '$password', '$phonenumber', '$dob', '$familycode', '$econtact','$familyrelation')";
         // if query succesfully runs, notify user 
@@ -37,10 +37,12 @@ if (isset($_POST['register'])) {
     }
 }
 
+
 // close connection
 mysqli_close($conn)
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="eng">
@@ -48,14 +50,65 @@ mysqli_close($conn)
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="styles.css" type="text/css" charset="utf-8">
         <title>Database</title>
+        <link rel="stylesheet" href="styles.css" type="text/css" charset="utf-8">
+        <script language="javascript">
+        var roleTypes= document.getElementById("role"),
+                roleOptions= [
+                document.getElementById("admin"),
+                document.getElementById("supervisor"),
+                document.getElementById("caregiver"),
+                document.getElementById("doctor"),
+                document.getElementById("patient"),
+                document.getElementById("family")
+                ],
+                hidingRoles=[
+                document.getElementById("familycode"),
+                document.getElementById("econtact"),
+                document.getElementById("familyrelation")
+                ];
+        function hideRoles(){
+            for (i=0; i < roleOptions.length; i++){
+                if (role.value=="patient"){
+                hidingRoles[0].style.display="inline-block";
+                hidingRoles[1].style.display="inline-block";
+                hidingRoles[2].style.display="inline-block";
+                } else {
+                console.log("hidden roles.");
+                hidingRoles[0].style.display="none";
+                hidingRoles[1].style.display="none";
+                hidingRoles[2].style.display="none";
+                }
+              }
+            }
+            fuction disable()
+            {
+                if (document..D1.value != 'Others')
+                        document.register.otherz.disabled=1;
+                else 
+                        document.register.otherz.disabled=0;
+            }
+            </script>
     </head>
+
     <body>
-        <form action="" method="POST">
             <h2>Register</h2>
+            <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+            <script type="text/javascript">
+                   $(function () {
+                       $("#role").change(function() {
+                           if ($(this).val() == "patient") {
+                               $("#familycode").removeAttr("disabled");
+                               $("#familycode").focus();
+                           } else {
+                               $("#familycode").attr("disabled", "disabled");
+                           }    
+                        });
+                    });
+            </script>
+        <form action="registration.php" name ="register" method="POST">
             <label>Role</label>
-                <select name="role">
+                <select id="role" name="role">
                     <option value="admin">Administrator</option>
                     <option value="supervisor">Supervisor</option>
                     <option value="doctor">Doctor</option>
@@ -69,7 +122,7 @@ mysqli_close($conn)
             <label>Password: </label><input type="text" name="password" /><br>
             <label>Phone Number: </label><input type="text" name="phonenumber" /><br>
             <label>Date of Birth: </label><input type="text" name="dob" /><br>
-            <label>Family Code (For Patient Family Member): </label><input type="text" name="familycode" /><br>
+            <label>Family Code (For Patient Family Member): </label><input type="text" name="familycode" id="familycode" disabled="disabled"><br>
             <label>Emergency Contact: </label><input type="text" name="econtact" /><br>
             <label>Relation to Emergency Contact: </label><input type="text" name="familyrelation" /><br>
             <input type="submit" name="register" value="Register Me">
