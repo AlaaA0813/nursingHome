@@ -1,4 +1,11 @@
-
+<?php 
+// connect to the DB
+include_once 'db.php';
+// checks connection, othewrise stop running script and throw error.
+if (!$conn) {
+    die("Connection failed: " . mysqli_eeror());
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -13,18 +20,43 @@
         <form action="" method="POST">
             <table>
                 <tr>
-                    <th>Name</th>
+                    <th>ID</th>
+                    <th> First Name</th>
+                    <th>Last Name</th>
                     <th>Role</th>
-                    <th>Approved</th>
+                    <th>Approval</th>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td><label>Yes</label><input type="checkbox" name="yes" /><label>No</label><input type="checkbox" name="no" /></td>
-                </tr>
+                    <?php
+                    $result = mysqli_query($conn, "SELECT * FROM Users");
+                    while ($row = mysqli_fetch_array($result)) {
+                        echo "
+                            <tr>
+
+                                <td name='id'>" . $row['ID'] . "</td>
+                                <td name='firstName'>" . $row['firstname'] . "</td>
+                                <td name='lastName'>" . $row['lastname'] . "</td>
+                                <td name='row'>" . $row['role'] . "</td>
+                                <td name='is_approved'>" . $row['is_approved'] . "</td>
+                                <td>
+                                    <button type='submit' name='approve'>Approve</button>
+                                    <button type='submit' name='disapprove''>Disapprove</button>
+                                </td>
+                            </tr>";
+                    }
+                    if(isset($_POST['approve'])){
+                        $id = $_POST['ID'];
+                        $sql = "UPDATE Users SET is_approved = 1 WHERE ID LIKE '$id'"; 
+                        mysqli_query($conn, $sql);
+                    }
+
+                    if(isset($_POST['disapprove'])){
+                        $id = $_POST['ID'];
+                        $sql = "UPDATE Users SET is_approved = 0 WHERE ID LIKE '$id'"; 
+                        mysqli_query($conn, $sql);
+                    }
+                    mysqli_close($conn);
+                    ?>
             </table>
-            <input type="submit" name="approveCancellation" value="Approve Cancellation">
-            <input type="submit" name="cancel" value="Cancel">
         </form>
     </body>
 </html>

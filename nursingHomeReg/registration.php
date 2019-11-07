@@ -25,7 +25,7 @@ if (isset($_POST['register'])) {
     // if inputs are not empty insert this data into the DB
     if (($role != '') && ($firstname != '') && ($lastname != '') && ($email != '') && ($password != '') && ($phonenumber != '') && ($dob != '') && ($familycode != '') && ($econtact != '') && ($familyrelation != '')) {
         // insert query, inserts all data into each columns
-        $insertQuery = "INSERT INTO Users (role, firstname, lastname, email, password, phonenumber, dob, familycode, econtact, familyrelation) VALUES ('$role', '$firstname', '$lastname', '$email', '$password', '$phonenumber', '$dob', '$familycode', '$econtact','$familyrelation')";
+        $insertQuery = "INSERT INTO `Users` (role, firstname, lastname, email, password, phonenumber, dob, familycode, econtact, familyrelation) VALUES ('$role', '$firstname', '$lastname', '$email', '$password', '$phonenumber', '$dob', '$familycode', '$econtact','$familyrelation')";
         // if query succesfully runs, notify user 
         if (mysqli_query($conn, $insertQuery)) {
             echo "Congratulations, you have registered!";
