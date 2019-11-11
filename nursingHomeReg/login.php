@@ -18,12 +18,12 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
             $_SESSION['email'] = $row['email'];
             $_SESSION['password'] = $row['password'];
         }
-      } else if (($_POST['email'] == '') || ($_POST['password'] == '')) {
-             echo "<p>You did not enter a username or password.</p>";
-      } else {
-            echo "<p>Incorrect Username or Password.</p>";
-      }
+    } else if (($_POST['email'] == '') || ($_POST['password'] == '')) {
+        echo "<p>You did not enter a username or password.</p>";
+    } else {
+        echo "<p>Incorrect Username or Password.</p>";
     }
+}
 ?>
 
 <!DOCTYPE html>

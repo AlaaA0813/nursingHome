@@ -49,22 +49,22 @@ if (!$conn) {
         if (isset($_POST['approve'])) {
             if (isset($_POST['check'])) {
                 foreach ($_POST['check'] as $value) {
-                    echo $value . "\n";
                     $update = "UPDATE Users SET is_approved=TRUE WHERE ID='$value'";
                     mysqli_query($conn, $update);
                 }
             }
+            header('Location: regapproval.php');
         }
         if (isset($_POST['remove'])) {
             if (isset($_POST['check'])) {
                 foreach ($_POST['check'] as $value) {
-                    echo $value . "\n";
                     $update = "UPDATE Users SET is_approved=FALSE WHERE ID='$value'";
                     mysqli_query($conn, $update);
                 }
             }
+            header('Location:  regapproval.php');
         }
-        
+
         mysqli_close($conn);
         ?>
     </body>
