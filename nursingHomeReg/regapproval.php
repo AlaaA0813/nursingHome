@@ -3,7 +3,7 @@
 include_once 'db.php';
 // checks connection, othewrise stop running script and throw error.
 if (!$conn) {
-    die("Connection failed: " . mysqli_eeror());
+    die("Connection failed: " . mysqli_error());
 }
 ?>
 <!DOCTYPE html>
@@ -17,46 +17,55 @@ if (!$conn) {
     </head>
     <body>
         <h1>Registration Approval</h1>
-        <form action="" method="POST">
-            <table>
-                <tr>
-                    <th>ID</th>
-                    <th> First Name</th>
-                    <th>Last Name</th>
-                    <th>Role</th>
-                    <th>Approval</th>
-                </tr>
-                    <?php
-                    $result = mysqli_query($conn, "SELECT * FROM Users");
+
+        <?php
+            $query = "SELECT * FROM Users";
+            $result = mysqli_query($conn, $query);
+            $i = 1; // counter for the checkboxes
+            echo "<form action='' method='POST'>";
+                echo "<table>
+                    <tr>
+                        <th>ID</th>
+                        <th> First Name</th>
+                        <th>Last Name</th>
+                        <th>Role</th>
+                        <th>Approval</th>
+                    </tr>";
                     while ($row = mysqli_fetch_array($result)) {
-                        echo "
-                            <tr>
+                        echo "<tr>";
+                            echo "<td name='id'>" . $row['ID'] . "</td>";
+                            echo "<td name='firstName'>" . $row['firstname'] . "</td>";
+                            echo "<td name='lastName'>" . $row['lastname'] . "</td>";
+                            echo "<td name='row'>" . $row['role'] . "</td>";
+                            echo "<td name='is_approved'>" . $row['is_approved'] . "</td>";
+                            echo "<td><input type='checkbox' name='check[$i]' value='".$row['ID']."'/>";                        echo "</tr>";
+                        $i++;
+                    }
+                echo "</table>";
+                echo "<input type='submit' name='approve' value='Approve'/>";
+                echo "<input type='submit' name='remove' value='Remove'/>";
+            echo "</form>";
 
-                                <td name='id'>" . $row['ID'] . "</td>
-                                <td name='firstName'>" . $row['firstname'] . "</td>
-                                <td name='lastName'>" . $row['lastname'] . "</td>
-                                <td name='row'>" . $row['role'] . "</td>
-                                <td name='is_approved'>" . $row['is_approved'] . "</td>
-                                <td>
-                                    <button type='submit' name='approve'>Approve</button>
-                                    <button type='submit' name='disapprove''>Disapprove</button>
-                                </td>
-                            </tr>";
-                    }
-                    if(isset($_POST['approve'])){
-                        $id = $_POST['ID'];
-                        $sql = "UPDATE Users SET is_approved = 1 WHERE ID LIKE '$id'"; 
-                        mysqli_query($conn, $sql);
-                    }
-
-                    if(isset($_POST['disapprove'])){
-                        $id = $_POST['ID'];
-                        $sql = "UPDATE Users SET is_approved = 0 WHERE ID LIKE '$id'"; 
-                        mysqli_query($conn, $sql);
-                    }
-                    mysqli_close($conn);
-                    ?>
-            </table>
-        </form>
+        if (isset($_POST['approve'])) {
+            if (isset($_POST['check'])) {
+                foreach ($_POST['check'] as $value) {
+                    echo $value . "\n";
+                    $update = "UPDATE Users SET is_approved=TRUE WHERE ID='$value'";
+                    mysqli_query($conn, $update);
+                }
+            }
+        }
+        if (isset($_POST['remove'])) {
+            if (isset($_POST['check'])) {
+                foreach ($_POST['check'] as $value) {
+                    echo $value . "\n";
+                    $update = "UPDATE Users SET is_approved=FALSE WHERE ID='$value'";
+                    mysqli_query($conn, $update);
+                }
+            }
+        }
+        
+        mysqli_close($conn);
+        ?>
     </body>
 </html>

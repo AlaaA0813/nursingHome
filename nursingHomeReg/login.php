@@ -1,3 +1,11 @@
+<?php
+include_once 'db.php';
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_eeror());
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
