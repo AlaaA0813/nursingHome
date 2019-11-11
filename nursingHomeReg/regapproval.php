@@ -38,7 +38,8 @@ if (!$conn) {
                             echo "<td name='lastName'>" . $row['lastname'] . "</td>";
                             echo "<td name='row'>" . $row['role'] . "</td>";
                             echo "<td name='is_approved'>" . $row['is_approved'] . "</td>";
-                            echo "<td><input type='checkbox' name='check[$i]' value='".$row['ID']."'/>";                        echo "</tr>";
+                            echo "<td><input type='checkbox' name='check[$i]' value='".$row['ID']."'/>";
+                        echo "</tr>";
                         $i++;
                     }
                 echo "</table>";
