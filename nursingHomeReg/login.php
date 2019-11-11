@@ -14,6 +14,10 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
         while ($row = mysqli_fetch_assoc($result)){    
             $_SESSION['email'] = $row['email'];
             $_SESSION['password'] = $row['password'];
+            $_SESSION['ID'] = $row['ID'];
+            $_SESSION['role'] = $row['role'];
+            $_SESSION['firstname'] = $row['firstname'];
+            $_SESSION['lastname']= $row['lastname'];
             
             header("Location: welcome.php");
             echo "you have logged in!";
