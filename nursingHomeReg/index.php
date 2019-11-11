@@ -15,7 +15,7 @@
             <input type="submit" value="Go To Log In" class="button" />
         </form>
         <form action="">
-            <input type="submit" value="Go To Sign Up!" class="button"/>
+            <input type="submit" value="Go To Sign Up" class="button"/>
         </form>
     </body>
 </html>

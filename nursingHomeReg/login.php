@@ -1,7 +1,10 @@
 <?php
 include_once 'db.php';
-
+if (!$conn) {
+    die("Connection failed: " . mysqli_error());
+}
 session_start();
+
 
 //correct way of checking for form submissions.
 if ($_SERVER['REQUEST_METHOD']=='POST'){
@@ -23,13 +26,12 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
             echo "you have logged in!";
         
         }
-      } else if (($_POST['email'] == '') || ($_POST['password'] == '')) {
-             echo "<p>You did not enter a username or password.</p>";
-      } else {
-            echo "<p>Incorrect Username or Password.</p>";
-      }
+    } else if (($_POST['email'] == '') || ($_POST['password'] == '')) {
+        echo "<p>You did not enter a username or password.</p>";
+    } else {
+        echo "<p>Incorrect Username or Password.</p>";
     }
-
+}
 ?>
 
 <!DOCTYPE html>
