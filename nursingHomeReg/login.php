@@ -8,12 +8,16 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
     $email = $_POST['email'];
     $password = $_POST['password'];
     //insert query to get email and password they regidtered with from database
-    $query = "SELECT * FROM `Users` WHERE 'email' = $email  AND 'password' = $password";
+    $query = "SELECT * FROM `Users` WHERE email = '$email'  AND password = '$password'";
     $result = mysqli_query($conn, $query);
     if (mysqli_num_rows($result) > 0){
         while ($row = mysqli_fetch_assoc($result)){    
             $_SESSION['email'] = $row['email'];
             $_SESSION['password'] = $row['password'];
+            
+            header("Location: welcome.php");
+            echo "you have logged in!";
+        
         }
       } else if (($_POST['email'] == '') || ($_POST['password'] == '')) {
              echo "<p>You did not enter a username or password.</p>";
