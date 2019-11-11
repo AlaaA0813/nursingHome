@@ -1,9 +1,29 @@
 <?php
 include_once 'db.php';
-
 if (!$conn) {
-    die("Connection failed: " . mysqli_eeror());
+    die("Connection failed: " . mysqli_error());
 }
+session_start();
+
+
+//correct way of checking for form submissions.
+if ($_SERVER['REQUEST_METHOD']=='POST'){
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    //insert query to get email and password they regidtered with from database
+    $query = "SELECT * FROM `Users` WHERE 'email' = $email  AND 'password' = $password";
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) > 0){
+        while ($row = mysqli_fetch_assoc($result)){    
+            $_SESSION['email'] = $row['email'];
+            $_SESSION['password'] = $row['password'];
+        }
+      } else if (($_POST['email'] == '') || ($_POST['password'] == '')) {
+             echo "<p>You did not enter a username or password.</p>";
+      } else {
+            echo "<p>Incorrect Username or Password.</p>";
+      }
+    }
 ?>
 
 <!DOCTYPE html>
