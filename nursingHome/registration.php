@@ -3,7 +3,7 @@
 include_once 'db.php';
 // checks connection, othewrise stop running script and throw error.
 if (!$conn) {
-    die("Connection failed: " . mysqli_eeror());
+    die("Connection failed: " . mysqli_error());
 }
 
 // check whether REGISTRATION variables are set or not

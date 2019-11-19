@@ -19,14 +19,14 @@ if (!$conn) {
         <h1>Registration Approval</h1>
 
         <?php
-            $query = "SELECT * FROM Users";
+            $query = "SELECT * FROM Users ORDER BY ID DESC WHERE is_approved=FALSE";
             $result = mysqli_query($conn, $query);
             $i = 1; // counter for the checkboxes
             echo "<form action='' method='POST'>";
                 echo "<table>
                     <tr>
                         <th>ID</th>
-                        <th> First Name</th>
+                        <th>First Name</th>
                         <th>Last Name</th>
                         <th>Role</th>
                         <th>Approval</th>
@@ -34,8 +34,8 @@ if (!$conn) {
                     while ($row = mysqli_fetch_array($result)) {
                         echo "<tr>";
                             echo "<td name='id'>" . $row['ID'] . "</td>";
-                            echo "<td name='firstName'>" . $row['firstname'] . "</td>";
-                            echo "<td name='lastName'>" . $row['lastname'] . "</td>";
+                            echo "<td name='firstName'>" . $row['firstName'] . "</td>";
+                            echo "<td name='lastName'>" . $row['lastName'] . "</td>";
                             echo "<td name='row'>" . $row['role'] . "</td>";
                             echo "<td name='is_approved'>" . $row['is_approved'] . "</td>";
                             echo "<td><input type='checkbox' name='check[$i]' value='".$row['ID']."'/>";
@@ -59,8 +59,8 @@ if (!$conn) {
         if (isset($_POST['remove'])) {
             if (isset($_POST['check'])) {
                 foreach ($_POST['check'] as $value) {
-                    $update = "UPDATE Users SET is_approved=FALSE WHERE ID='$value'";
-                    mysqli_query($conn, $update);
+                    $delete = "DELETE FROM Users WHERE ID='$value'";
+                    mysqli_query($conn, $delete);
                 }
             }
             header('Location:  regapproval.php');
