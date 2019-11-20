@@ -18,69 +18,52 @@ if (!$conn) {
     <body>
     <h1>Employees</h1>
     <form action='employee.php' method='POST'>
-    <?php
-    //write a query that gets id, name, role from user but only gets employees
-            $query = "SELECT ID, firstname, lastname, role FROM Users WHERE role IN ('admin', 'supervisor','caregiver','doctor')";
-            //SELECT firstname, lastname FROM Users UNION SELECT ID, salary FROM Employees WHERE role IN ('admin', 'supervisor','caregiver','doctor'
-            $result = mysqli_query($conn, $query);
-            $i = 1; // counter for the checkboxes
-                echo "<table>
+    <table>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Role</th>
+          <th>Salary</th>
+        </tr>
+        <?php 
+            $query = mysqli_query($conn, "SELECT employees.ID, employees.salary, users.role, users.firstname, users.lastname FROM employees, users WHERE employees.ID = users.ID");
+            $i = 1;
+            while($row = mysqli_fetch_array($query)){
+            echo "
                     <tr>
-                        <th>ID</th>
-                        <th>FirstName</th>
-                        <th>LastName</th>
-                        <th>Role</th>
-                        <th>Salary</th>
+                    <td name='ID'>" . $row['ID'] . "</td>
+                    <td name='name'>" . $row['firstname'] . '&nbsp;' . $row['lastname'] . "</td>
+                    <td name='role'>" . $row['role'] . "</td>
+                    <td name='salary'>" . $row['salary'] . "</td>
                     </tr>";
-                    while ($row = mysqli_fetch_array($result)) {
-                        echo "<tr>";
-                            echo "<td name='ID'>" . $row['ID'] . "</td>";
-                            echo "<td name='firstname'>" . $row['firstname'] . "</td>";
-                            echo "<td name='lastname'>" . $row['lastname'] . "</td>";
-                            echo "<td name='role'>" . $row['role'] . "</td>";
-                            echo "<td name='salary'>" . $row['salary'] . "</td>";
-
-
-                        echo "</tr>";
-                        $i++;
-                    }
-                echo "</table>";
-            //FIGURE OUT SEARCH ID echo "<label>Employee ID: </label>";
-            echo "<input type='text' name='ID' />";
-            echo "<br>";
-            echo "<label>New Salary: </label>";
-            echo "<input type='text' name='salary' />";
-            echo "<br>";
+            }
+            echo "
+            <label>Employee ID: </label>
+                <input type='number' name='ID'>
+            <br>
+            <label>New Salary: </label>
+                <input type='number' name='salary'>
+            <br>
+            <button type='submit' name='update'>Update</button>";
+            //add cancel button            
     
-
-            
-            echo "<input type='submit' name='add_salary' value='Add Salary'>";
-       
-
-            
-            if (isset($_POST['add_salary'])) {
-                $salary = $_POST['salary'];
-                
-        
-                if ( ($salary != '')) {
-                  
-                  $sql = "INSERT INTO Users (salary) VALUES
-                  ('$salary')";
-     
-        
-                  if (mysqli_query($conn, $sql)) {
-                    echo "New Salary has been added";
-                  }
-                  else {
-                    echo "Error adding salary" . mysqli_error($conn);
-                  }
-                }
-              }
-              
-    
-            mysqli_close($conn); //Make sure to close out the database connection
-    
-        ?>
-    </form>
+        if (isset($_POST['update'])) {
+            $ID = $_POST['ID'];
+            $salary = $_POST['salary'];
+            if (($ID != '') && ($salary != '')) {
+            $insertQuery = "UPDATE employees SET salary = '$salary' WHERE ID = '$ID'";
+            if (mysqli_query($conn, $insertQuery)) {
+                echo "Your salary has been updated";
+            }
+            else {
+                echo "Error updating your salary" . mysqli_error($conn);
+            }
+            }
+        }
+            mysqli_close($conn); //close connection
+    ?>
+            </table>
+        </form>
     </body>
-</html>
+    </html>
+
