@@ -31,7 +31,7 @@ if (isset($_SESSION['ID'])){
     } else if ($role == "doctor"){
         include ("doctorhome.php");
     } else if ($role == "patient"){
-        include ("patients.php");
+        include ("payment.php");
     } else if ($role == "family") {
         include ("famhome.php"); 
     }

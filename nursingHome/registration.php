@@ -18,24 +18,43 @@ if (isset($_POST['register'])) {
     $dob = $_POST['dob'];
 
     // if family role is selected, the following variables will be set
-    $familycode = $_POST['familycode'];
-    $econtact = $_POST['econtact'];
-    $familyrelation = $_POST['familyrelation'];
+    $familycode = $_POST['familycode'] ?? '';
+    $econtactnum = $_POST['econtactnum'] ?? '';
+    $familyrelation = $_POST['familyrelation'] ?? '';
   
+    // IF USER IS NOT EMPTY AND USER IS NOT A PATIENT
+        // IF 
     // if inputs are not empty insert this data into the DB
-    if (($role != '') && ($firstname != '') && ($lastname != '') && ($email != '') && ($password != '') && ($phonenumber != '') && ($dob != '') && ($familycode != '' || $familycode == '') && ($econtact != '') && ($familyrelation != '')) {
-        // insert query, inserts all data into each columns
-        $insertQuery = "INSERT INTO `Users` (role, firstname, lastname, email, password, phonenumber, dob, familycode, econtact, familyrelation) VALUES ('$role', '$firstname', '$lastname', '$email', '$password', '$phonenumber', '$dob', '$familycode', '$econtact','$familyrelation')";
-        // if query succesfully runs, notify user 
-        if (mysqli_query($conn, $insertQuery)) {
-            echo "Congratulations, you have registered!";
-        }
-        // if query fails to run, notify user
-        else {
-            echo " Error with registering." . mysqli_error($conn);
+ 
+       // if (($role != '') && ($firstname != '') && ($lastname != '') && ($email != '') && ($password != '') && ($phonenumber != '') && ($dob != '')) {
+            // insert query, inserts all data into each columns
+        //    $insertQuery1 = "INSERT INTO `users` (role, firstname, lastname, email, password, phonenumber, dob) VALUES ('$role', '$firstname', '$lastname', '$email', '$password', '$phonenumber', '$dob')";
+            // if query succesfully runs, notify user 
+        //    if (mysqli_query($conn, $insertQuery1)){ 
+        //        echo "Congratulations, you have registered!";
+         //   }
+            // if query fails to run, notify user
+        //    else {
+          //      echo " Error with registering." . mysqli_error($conn);
+       //     }
+      //  }
+   //} else {
+        if (($role != '') && ($firstname != '') && ($lastname != '') && ($email != '') && ($password != '') && ($phonenumber != '') && ($dob != '')) { //&& ($econtactnum != '') && ($familyrelation != '') && ($familycode != '')) {
+            // insert query, inserts all data into each columns
+            $insertQuery1 = "INSERT INTO `users` (role, firstname, lastname, email, password, phonenumber, dob) VALUES ('$role', '$firstname', '$lastname', '$email', '$password', '$phonenumber', '$dob')";
+            $insertQuery2 = "INSERT INTO `patients` (familycode, econtactnum, familyrelation) VALUES ('$familycode', '$econtactnum', '$familyrelation')";
+            // if query succesfully runs, notify user 
+            if (mysqli_query($conn, $insertQuery1) && (mysqli_query($conn, $insertQuery2))) {
+                    echo "Congratulations, you have registered!";
+            }
+            // if query fails to run, notify user
+            else {
+               echo " Error with registering." . mysqli_error($conn);
+            }
         }
     }
-}
+
+
 
 
 // close connection
@@ -64,7 +83,7 @@ mysqli_close($conn)
                 ],
                 hidingRoles=[
                 document.getElementById("familycode"),
-                document.getElementById("econtact"),
+                document.getElementById("econtactnum"),
                 document.getElementById("familyrelation")
                 ];
         function hideRoles(){
@@ -95,16 +114,22 @@ mysqli_close($conn)
             <h2>Register</h2>
             <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
             <script type="text/javascript">
-                   $(function () {
-                       $("#role").change(function() {
-                           if ($(this).val() == "patient") {
-                               $("#familycode").removeAttr("disabled");
-                               $("#familycode").focus();
-                           } else {
-                               $("#familycode").attr("disabled", "disabled");
-                           }    
-                        });
-                    });
+            $(function () {
+                $("#role").change(function() {
+                    if ($(this).val() == "patient") {
+                        $("#familycode").removeAttr("disabled");
+                        $("#familycode").focus();
+                        $("#econtactnum").removeAttr("disabled");
+                        $("#econtactnum").focus();
+                        $("#familyrelation").removeAttr("disabled");
+                        $("#familyrelation").focus();
+                    } else {
+                        $("#familycode").attr("disabled", "disabled");
+                        $("#econtactnum").attr("disabled", "disabled");
+                        $("#familyrelation").attr("disabled", "disabled");
+                    }    
+                });
+                });      
             </script>
         <form action="registration.php" name ="register" method="POST">
             <label>Role</label>
@@ -121,10 +146,10 @@ mysqli_close($conn)
             <label>Email: </label><input type="text" name="email" /><br>
             <label>Password: </label><input type="text" name="password" /><br>
             <label>Phone Number: </label><input type="text" name="phonenumber" /><br>
-            <label>Date of Birth: </label><input type="text" name="dob" /><br>
+            <label>Date of Birth: </label><input type="date" name="dob" /><br>
             <label>Family Code (For Patient Family Member): </label><input type="text" name="familycode" id="familycode" disabled="disabled"><br>
-            <label>Emergency Contact: </label><input type="text" name="econtact" /><br>
-            <label>Relation to Emergency Contact: </label><input type="text" name="familyrelation" /><br>
+            <label>Emergency Contact: </label><input type="text" name="econtactnum" id="econtactnum" disabled="disabled" /><br>
+            <label>Relation to Emergency Contact: </label><input type="text" name="familyrelation" id="familyrelation" disabled="disabled" /><br>
             <input type="submit" name="register" value="Register Me">
             <input type="submit" name="cancel" value="Cancel Registration">
         </form>
