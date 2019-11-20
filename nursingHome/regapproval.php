@@ -17,9 +17,21 @@ if (!$conn) {
     </head>
     <body>
         <h1>Registration Approval</h1>
+        <nav class="nav">
+            <ul>
+                <li><a href="addinfo.php">Home</a></li>
+                <li><a href="role.php">Roles</a></li>
+                <li><a href="employee.php">Employee</a></li>
+                <li><a href="patients.php">Patients</a></li>
+                <li><a href="regapproval.php">Registration Approval</a></li>
+                <li><a href="roster.php">Roster</a></li>
+                <li><a href="adminreport.php">Admin's Report</a></li>
+                <li><a href="payment.php">Payment</a></li>
+            </ul>
+        </nav>
 
         <?php
-            $query = "SELECT * FROM Users ORDER BY ID DESC WHERE is_approved=FALSE";
+            $query = "SELECT * FROM users ORDER BY ID DESC WHERE is_approved=FALSE";
             $result = mysqli_query($conn, $query);
             $i = 1; // counter for the checkboxes
             echo "<form action='' method='POST'>";
@@ -34,8 +46,8 @@ if (!$conn) {
                     while ($row = mysqli_fetch_array($result)) {
                         echo "<tr>";
                             echo "<td name='id'>" . $row['ID'] . "</td>";
-                            echo "<td name='firstName'>" . $row['firstName'] . "</td>";
-                            echo "<td name='lastName'>" . $row['lastName'] . "</td>";
+                            echo "<td name='firstname'>" . $row['firstname'] . "</td>";
+                            echo "<td name='lastname'>" . $row['lastname'] . "</td>";
                             echo "<td name='row'>" . $row['role'] . "</td>";
                             echo "<td name='is_approved'>" . $row['is_approved'] . "</td>";
                             echo "<td><input type='checkbox' name='check[$i]' value='".$row['ID']."'/>";
@@ -50,7 +62,7 @@ if (!$conn) {
         if (isset($_POST['approve'])) {
             if (isset($_POST['check'])) {
                 foreach ($_POST['check'] as $value) {
-                    $update = "UPDATE Users SET is_approved=TRUE WHERE ID='$value'";
+                    $update = "UPDATE users SET is_approved=TRUE WHERE ID='$value'";
                     mysqli_query($conn, $update);
                 }
             }
@@ -59,7 +71,7 @@ if (!$conn) {
         if (isset($_POST['remove'])) {
             if (isset($_POST['check'])) {
                 foreach ($_POST['check'] as $value) {
-                    $delete = "DELETE FROM Users WHERE ID='$value'";
+                    $delete = "DELETE FROM users WHERE ID='$value'";
                     mysqli_query($conn, $delete);
                 }
             }

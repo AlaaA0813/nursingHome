@@ -18,6 +18,18 @@ if (!$conn) {
     </head>
     <body>
         <h1>Patients Chart</h1>
+        <nav class="nav">
+            <ul>
+                <li><a href="addinfo.php">Home</a></li>
+                <li><a href="role.php">Roles</a></li>
+                <li><a href="employee.php">Employee</a></li>
+                <li><a href="patients.php">Patients</a></li>
+                <li><a href="regapproval.php">Registration Approval</a></li>
+                <li><a href="roster.php">Roster</a></li>
+                <li><a href="adminreport.php">Admin's Report</a></li>
+                <li><a href="payment.php">Payment</a></li>
+            </ul>
+        </nav>
         <?php
             $query = "SELECT * FROM Patients";
             $result = mysqli_query($conn, $query);
@@ -60,7 +72,7 @@ if (!$conn) {
             if (isset($_POST['search'])) {
                 if (isset($_POST['srchID'])) {
                     $id = mysqli_real_escape_string($conn, htmlspecialchars($_POST['srchID']));
-                    $srchID = "SELECT * FROM Patients WHERE ID LIKE '{$_POST['srchID']}%'";
+                    $srchID = "SELECT * FROM patients WHERE ID LIKE '{$_POST['srchID']}%'";
                     $result = mysqli_query($conn, $srchID);
                     echo $result;
                 }
@@ -69,7 +81,7 @@ if (!$conn) {
             if (isset($_POST['search'])) {
                 if (isset($_POST['srchfName'])) {
                     $id = mysqli_real_escape_string($conn, htmlspecialchars($_POST['srchfName']));
-                    $srchfName = "SELECT * FROM Patients WHERE firstname LIKE '{$_POST['srchfName']}%'";
+                    $srchfName = "SELECT * FROM patients WHERE firstname LIKE '{$_POST['srchfName']}%'";
                     $result = mysqli_query($conn, $srchfName);
                     echo $result;
                 }
@@ -78,7 +90,7 @@ if (!$conn) {
             if (isset($_POST['search'])) {
                 if (isset($_POST['srchlName'])) {
                     $id = mysqli_real_escape_string($conn, htmlspecialchars($_POST['srchlName']));
-                    $srchlName = "SELECT * FROM Patients WHERE lastname LIKE '{$_POST['srchlName']}%'";
+                    $srchlName = "SELECT * FROM patients WHERE lastname LIKE '{$_POST['srchlName']}%'";
                     $result = mysqli_query($conn, $srchlName);
                     echo $result;
                 }
@@ -87,7 +99,7 @@ if (!$conn) {
             if (isset($_POST['search'])) {
                 if (isset($_POST['srchAge'])) {
                     $id = mysqli_real_escape_string($conn, htmlspecialchars($_POST['srchAge']));
-                    $srchAge = "SELECT * FROM Patients WHERE age LIKE '{$_POST['srchAge']}%'";
+                    $srchAge = "SELECT * FROM patients WHERE age LIKE '{$_POST['srchAge']}%'";
                     $result = mysqli_query($conn, $srchAge);
                     echo $result;
                 }
@@ -96,7 +108,7 @@ if (!$conn) {
             if (isset($_POST['search'])) {
                 if (isset($_POST['srchEContactName'])) {
                     $id = mysqli_real_escape_string($conn, htmlspecialchars($_POST['srchEContactName']));
-                    $srchEContactName = "SELECT * FROM Patients WHERE econtactname LIKE '{$_POST['srchEContactName']}%'";
+                    $srchEContactName = "SELECT * FROM patients WHERE econtactname LIKE '{$_POST['srchEContactName']}%'";
                     $result = mysqli_query($conn, $srchEContactName);
                     echo $result;
                 }
@@ -105,7 +117,7 @@ if (!$conn) {
             if (isset($_POST['search'])) {
                 if (isset($_POST['srchEContactPhone'])) {
                     $id = mysqli_real_escape_string($conn, htmlspecialchars($_POST['srchEContactPhone']));
-                    $srchEContactPhone = "SELECT * FROM Patients WHERE econtact LIKE '{$_POST['srchEContactPhone']}%'";
+                    $srchEContactPhone = "SELECT * FROM patients WHERE econtact LIKE '{$_POST['srchEContactPhone']}%'";
                     $result = mysqli_query($conn, $srchEContactPhone);
                     echo $result;
                 }
@@ -114,7 +126,7 @@ if (!$conn) {
             if (isset($_POST['search'])) {
                 if (isset($_POST['srchAdmissionDate'])) {
                     $id = mysqli_real_escape_string($conn, htmlspecialchars($_POST['srchAdmissionDate']));
-                    $srchAdmissionDate = "SELECT * FROM Patients WHERE admission_date LIKE '{$_POST['srchAdmissionDate']}%'";
+                    $srchAdmissionDate = "SELECT * FROM patients WHERE admission_date LIKE '{$_POST['srchAdmissionDate']}%'";
                     $result = mysqli_query($conn, $srchAdmissionDate);
                     echo $result;
                 }

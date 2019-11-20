@@ -9,6 +9,12 @@
     </head>
     <body>
         <h1>Cavegiver's Home</h1>
+        <nav class="nav">
+            <ul>
+                <li><a href="carehome.php">Home</a></li>
+                <li><a href="roster.php">Roster</a></li>
+            </ul>
+        </nav>
         <form action="" method="POST">
             <label>List of Patients duty today</label>
             <table>

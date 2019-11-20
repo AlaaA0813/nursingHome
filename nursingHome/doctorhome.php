@@ -9,6 +9,13 @@
     </head>
     <body>
         <h1>Doctor's Home</h1>
+        <nav class="nav">
+            <ul>
+                <li><a href="doctorhome.php">Home</a></li>
+                <li><a href="appointment.php">Appointments</a></li>
+                <li><a href="patientofdoc.php">Your Patients</a></li>
+            </ul>
+        </nav>
         <p>Add a search option for each attribute</p>
         <form action="" method="POST">
             <table>

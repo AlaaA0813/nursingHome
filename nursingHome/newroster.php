@@ -10,6 +10,12 @@
     </head>
     <body>
         <h1>New Roster</h1>
+        <nav class="nav">
+            <ul>
+                <li><a href="roster.php">Home</a></li>
+                <li><a href="newroster.php">New Roster</a></li>
+            </ul>
+        </nav>
         <form action="" method="POST">
             <br><label>Date: </label><input type="text" name="date" /><br>
             <br><label>Supervisor</label>  

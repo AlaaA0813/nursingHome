@@ -9,6 +9,18 @@
     </head>
     <body>
         <h1>Admin's Report</h1>
+        <nav class="nav">
+            <ul>
+                <li><a href="addinfo.php">Home</a></li>
+                <li><a href="role.php">Roles</a></li>
+                <li><a href="employee.php">Employee</a></li>
+                <li><a href="patients.php">Patients</a></li>
+                <li><a href="regapproval.php">Registration Approval</a></li>
+                <li><a href="roster.php">Roster</a></li>
+                <li><a href="adminreport.php">Admin's Report</a></li>
+                <li><a href="payment.php">Payment</a></li>
+            </ul>
+        </nav>
         <form action="" method="POST">
             <label>Date: </label><input type="text" name="date" /><br>
             <input type="submit" name="missedPatientActivity" value="Missed Patient Activity">    
