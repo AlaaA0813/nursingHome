@@ -18,9 +18,21 @@ if (!$conn) {
     <body>
     <form action='role.php' method='POST'>
         <h1>Roles</h1>
+        <nav class="nav">
+            <ul>
+                <li><a href="addinfo.php">Home</a></li>
+                <li><a href="role.php">Roles</a></li>
+                <li><a href="employee.php">Employee</a></li>
+                <li><a href="patients.php">Patients</a></li>
+                <li><a href="regapproval.php">Registration Approval</a></li>
+                <li><a href="roster.php">Roster</a></li>
+                <li><a href="adminreport.php">Admin's Report</a></li>
+                <li><a href="payment.php">Payment</a></li>
+            </ul>
+        </nav>
 ​
         <?php
-            $query = "SELECT * FROM Role"; 
+            $query = "SELECT * FROM role"; 
             $result = mysqli_query($conn, $query);
             $i = 1; // counter for the checkboxes
                 echo "<table>
@@ -54,7 +66,7 @@ if (!$conn) {
         
                 if (($newrole != '') && ($accesslevel != '')) {
                   
-                  $sql = "INSERT INTO Role (role_id, access_level) VALUES
+                  $sql = "INSERT INTO role (role_id, access_level) VALUES
                      ('$newrole', '$accesslevel')";
         
                   if (mysqli_query($conn, $sql)) {

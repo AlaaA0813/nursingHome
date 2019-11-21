@@ -25,6 +25,18 @@ if (isset($_POST['register'])) {
     if (($role != '') && ($firstname != '') && ($lastname != '') && ($email != '') && ($password != '') && ($phonenumber != '') && ($dob != '')) { //&& ($econtactnum != '') && ($familyrelation != '') && ($familycode != '')) {
         // insert query, inserts all data into each columns
         $insertQuery1 = "INSERT INTO `users` (role, firstname, lastname, email, password, phonenumber, dob) VALUES ('$role', '$firstname', '$lastname', '$email', '$password', '$phonenumber', '$dob')";
+        if (mysqli_query($conn, $insertQuery1)) {
+            echo "Congratulations, you have registered !";
+        }
+        // if query fails to run, notify user
+        else {
+            echo " Error with registering." . mysqli_error($conn);
+        }
+    }
+
+        
+        if (($role == 'patient')) {
+        // do select statement that grabs the id where the email is equaled to
         $insertQuery2 = "INSERT INTO `patients` (familycode, econtactnum, familyrelation) VALUES ('$familycode', '$econtactnum', '$familyrelation')";
         // if query succesfully runs or fails, notify user 
         if (mysqli_query($conn, $insertQuery1) && (mysqli_query($conn, $insertQuery2))) {

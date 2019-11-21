@@ -9,6 +9,13 @@
     </head>
     <body>
         <h1>Patient(s) of Doctor</h1>
+        <nav class="nav">
+            <ul>
+                <li><a href="doctorhome.php">Home</a></li>
+                <li><a href="appointment.php">Appointments</a></li>
+                <li><a href="patientofdoc.php">Your Patients</a></li>
+            </ul>
+        </nav>
         <form action="" method="POST">
             <table>
                 <tr>
