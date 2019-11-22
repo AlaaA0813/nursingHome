@@ -31,7 +31,7 @@ if (!$conn) {
         </nav>
 
         <?php
-            $query = "SELECT * FROM users ORDER BY ID DESC WHERE is_approved=FALSE";
+            $query = "SELECT * FROM `users` WHERE is_approved='0'";
             $result = mysqli_query($conn, $query);
             $i = 1; // counter for the checkboxes
             echo "<form action='' method='POST'>";
@@ -43,12 +43,12 @@ if (!$conn) {
                         <th>Role</th>
                         <th>Approval</th>
                     </tr>";
-                    while ($row = mysqli_fetch_array($result)) {
+                    while ($row = mysqli_fetch_assoc($result)) {
                         echo "<tr>";
                             echo "<td name='id'>" . $row['ID'] . "</td>";
                             echo "<td name='firstname'>" . $row['firstname'] . "</td>";
                             echo "<td name='lastname'>" . $row['lastname'] . "</td>";
-                            echo "<td name='row'>" . $row['role'] . "</td>";
+                            echo "<td name='role'>" . $row['role'] . "</td>";
                             echo "<td name='is_approved'>" . $row['is_approved'] . "</td>";
                             echo "<td><input type='checkbox' name='check[$i]' value='".$row['ID']."'/>";
                         echo "</tr>";
@@ -59,26 +59,26 @@ if (!$conn) {
                 echo "<input type='submit' name='remove' value='Remove'/>";
             echo "</form>";
 
-        if (isset($_POST['approve'])) {
-            if (isset($_POST['check'])) {
-                foreach ($_POST['check'] as $value) {
-                    $update = "UPDATE users SET is_approved=TRUE WHERE ID='$value'";
-                    mysqli_query($conn, $update);
+            if (isset($_POST['approve'])) {
+                if (isset($_POST['check'])) {
+                    foreach ($_POST['check'] as $value) {
+                        $update = "UPDATE `users` SET is_approved='1' WHERE ID='$value'";
+                        mysqli_query($conn, $update);
+                    }
                 }
+                header('Location: regapproval.php');
             }
-            header('Location: regapproval.php');
-        }
-        if (isset($_POST['remove'])) {
-            if (isset($_POST['check'])) {
-                foreach ($_POST['check'] as $value) {
-                    $delete = "DELETE FROM users WHERE ID='$value'";
-                    mysqli_query($conn, $delete);
+            if (isset($_POST['remove'])) {
+                if (isset($_POST['check'])) {
+                    foreach ($_POST['check'] as $value) {
+                        $delete = "DELETE FROM `users` WHERE ID='$value'";
+                        mysqli_query($conn, $delete);
+                    }
                 }
+                header('Location:  regapproval.php');
             }
-            header('Location:  regapproval.php');
-        }
 
-        mysqli_close($conn);
+            mysqli_close($conn);
         ?>
     </body>
 </html>

@@ -32,7 +32,7 @@ if (!$conn) {
         </nav>
 ​
         <?php
-            $query = "SELECT * FROM role"; 
+            $query = "SELECT * FROM `roles`"; 
             $result = mysqli_query($conn, $query);
             $i = 1; // counter for the checkboxes
                 echo "<table>

@@ -18,25 +18,25 @@ include_once 'db.php';
     </head>
     <body>
         <!-- <h1>Welcome to your temporary home page.</h1> -->
-    <?php
+        <?php
 
-if (isset($_SESSION['ID'])){
-    $role = $_SESSION['role'];
-    if ($role == "admin"){
-        include ("regapproval.php");
-    } else if ($role == "supervisor"){
-        include ("roster.php");
-    } else if ($role == "caregiver"){
-        include ("carehome.php");
-    } else if ($role == "doctor"){
-        include ("doctorhome.php");
-    } else if ($role == "patient"){
-        include ("payment.php");
-    } else if ($role == "family") {
-        include ("famhome.php"); 
-    }
-}
-    ?>
+            if (isset($_SESSION['ID'])) {
+                $role = $_SESSION['role'];
+                if ($role == "admin"){
+                    include ("regapproval.php");
+                } else if ($role == "supervisor"){
+                    include ("roster.php");
+                } else if ($role == "caregiver"){
+                    include ("carehome.php");
+                } else if ($role == "doctor"){
+                    include ("doctorhome.php");
+                } else if ($role == "patient"){
+                    include ("payment.php");
+                } else if ($role == "family") {
+                    include ("famhome.php"); 
+                }
+            }
+        ?>
 
     </body>
 </html>

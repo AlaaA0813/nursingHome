@@ -1,13 +1,9 @@
 <?php 
-// connect to the DB
 include_once 'db.php';
-// checks connection, othewrise stop running script and throw error.
 if (!$conn) {
     die("Connection failed: " . mysqli_error());
 }
 
-// check whether REGISTRATION variables are set or not
-// isset() function return false if testing variable contains a NULL value
 if (isset($_POST['register'])) {
     $role = $_POST['role'];
     $firstname = $_POST['firstname'];
@@ -17,40 +13,43 @@ if (isset($_POST['register'])) {
     $phonenumber = $_POST['phonenumber'];
     $dob = $_POST['dob'];
 
-    // if family role is selected, the following variables will be set
+    // if patient role is selected
     $familycode = $_POST['familycode'] ?? '';
     $econtactnum = $_POST['econtactnum'] ?? '';
     $familyrelation = $_POST['familyrelation'] ?? '';
-  
-    if (($role != '') && ($firstname != '') && ($lastname != '') && ($email != '') && ($password != '') && ($phonenumber != '') && ($dob != '')) { //&& ($econtactnum != '') && ($familyrelation != '') && ($familycode != '')) {
-        // insert query, inserts all data into each columns
-        $insertQuery1 = "INSERT INTO `users` (role, firstname, lastname, email, password, phonenumber, dob) VALUES ('$role', '$firstname', '$lastname', '$email', '$password', '$phonenumber', '$dob')";
-        if (mysqli_query($conn, $insertQuery1)) {
-            echo "Congratulations, you have registered !";
-        }
-        // if query fails to run, notify user
-        else {
-            echo " Error with registering." . mysqli_error($conn);
+    
+    if ($role != 'patient') {
+        if (($role != '') && ($firstname != '') && ($lastname != '') && ($email != '') && ($password != '') && ($phonenumber != '') && ($dob != '')) {
+            $insertUsers = "INSERT INTO `users` (role, firstname, lastname, email, password, phonenumber, dob) VALUES ('$role', '$firstname', '$lastname', '$email', '$password', '$phonenumber', '$dob')";
+            if (mysqli_query($conn, $insertUsers)) {
+                echo "Congratulations, you have registered! Please wait for approval.";
+            } else {
+                echo " Error with registering." . mysqli_error($conn);
+            }
         }
     }
-
-        
-        if (($role == 'patient')) {
-        // do select statement that grabs the id where the email is equaled to
-        $insertQuery2 = "INSERT INTO `patients` (familycode, econtactnum, familyrelation) VALUES ('$familycode', '$econtactnum', '$familyrelation')";
-        // if query succesfully runs or fails, notify user 
-        if (mysqli_query($conn, $insertQuery1) && (mysqli_query($conn, $insertQuery2))) {
-            echo "Congratulations, you have registered!";
-        } else {
-            echo " Error with registering." . mysqli_error($conn);
+    if ($role == 'patient') {
+        if (($role != '') && ($firstname != '') && ($lastname != '') && ($email != '') && ($password != '') && ($phonenumber != '') && ($dob != '') && ($familycode != '') && ($econtactnum != '') && ($familyrelation)) {
+            $insertUsers = "INSERT INTO `users` (role, firstname, lastname, email, password, phonenumber, dob) VALUES ('$role', '$firstname', '$lastname', '$email', '$password', '$phonenumber', '$dob')";
+            mysqli_query($conn, $insertUsers);
+            $getUserID = "SELECT ID FROM `users` WHERE firstname='$firstname' AND lastname='$lastname' AND email='$email'";
+            $result = mysqli_query($conn, $getUserID);
+            $resultCheck = mysqli_num_rows($result);
+            if ($resultCheck > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $ID = $row['ID'];
+                }
+                $insertPatients = "INSERT INTO `patients` (ID, patient_id, familycode, econtactnum, familyrelation, admission_date, groupnum, billdue) VALUES ('$ID', '$ID', '$familycode', '$econtactnum', '$familyrelation', NULL, NULL, 0.00)";
+                if (mysqli_query($conn, $insertPatients)) {
+                echo "Congratulations, you have registered!  Please wait for approval.";
+                } else {
+                    echo " Error with registering." . mysqli_error($conn);
+                }
+            }
         }
     }
 }
 
-
-
-
-// close connection
 mysqli_close($conn)
 
 ?>
