@@ -80,5 +80,6 @@ if (!$conn) {
 
             mysqli_close($conn);
         ?>
+        <a href="logout.php">Logout</a>
     </body>
 </html>

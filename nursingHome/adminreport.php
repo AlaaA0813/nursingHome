@@ -50,6 +50,7 @@
                     <td><input type="checkbox" name="dinner" /></td>
                 </tr>
             </table>
+            <a href="logout.php">Logout</a>
         </form>
     </body>
 </html>

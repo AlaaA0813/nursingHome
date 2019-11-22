@@ -45,6 +45,7 @@
                     <td></td>  
                 </tr>
             </table>
+            <a href="logout.php">Logout</a>
         </form>
         <form action="" method="POST">
             <label>Appointment: </label><input type="text" name="tilldate" placeholder="Till Date" /><input type="submit" name="searchAppt" value="Search">

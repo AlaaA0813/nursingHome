@@ -37,6 +37,8 @@
             <label>Admission Date: </label><input type="text" name="admissionDate" /><br>
             <input type="submit" name="ok" value="OK">
             <input type="submit" name="cancel" value="Cancel">
+
+            <a href="logout.php">Logout</a>
         </form>
     </body>
 </html>

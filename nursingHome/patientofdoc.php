@@ -51,6 +51,7 @@
             </table><br>
             <input type="submit" name="addPrescription" value="Add Prescription">
             <input type="submit" name="cancel" value="Cancel">  
+            <a href="logout.php">Logout</a>
         </form>
     </body>
 </html>

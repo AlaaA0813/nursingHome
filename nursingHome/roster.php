@@ -43,6 +43,7 @@
                     <td>Patient Group</td>
                 </tr>
             </table>
+            <a href="logout.php">Logout</a>
         </form>
     </body>
 </html>

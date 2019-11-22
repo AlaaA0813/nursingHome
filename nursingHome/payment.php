@@ -32,6 +32,7 @@
             </ul><br>
             <input type="submit" name="makePayment" value="Make Payment">
             <input type="submit" name="cancel" value="Cancel">
+            <a href="logout.php">Logout</a>
         </form>
     </body>
 </html>

@@ -27,6 +27,7 @@
             </select><br>
             <input type="submit" name="Set Appointment" value="Set Appointment">
             <input type="submit" name="cancel" value="Cancel">
+            <a href="logout.php">Logout</a>
         </form>
     </body>
 </html>

@@ -82,6 +82,7 @@ if (!$conn) {
             mysqli_close($conn); //Make sure to close out the database connection
     
         ?>
+        <a href="logout.php">Logout</a>
     </form>
     </body>
 </html>

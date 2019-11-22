@@ -4,6 +4,8 @@ if (!$conn) {
     die("Connection failed: " . mysqli_error());
 }
 
+
+
 if (isset($_POST['register'])) {
     $role = $_POST['role'];
     $firstname = $_POST['firstname'];
