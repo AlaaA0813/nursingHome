@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
             $_SESSION['firstname'] = $row['firstname'];
             $_SESSION['lastname']= $row['lastname'];
             
-            header("Location: welcome.php");
+            header("Location: homepage.php");
             echo "you have logged in!";
         
         }

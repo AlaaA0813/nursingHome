@@ -23,7 +23,7 @@ include_once 'db.php';
             if (isset($_SESSION['ID'])) {
                 $role = $_SESSION['role'];
                 if ($role == "admin"){
-                    include ("regapproval.php");
+                    include ("addinfo.php");
                 } else if ($role == "supervisor"){
                     include ("roster.php");
                 } else if ($role == "caregiver"){
