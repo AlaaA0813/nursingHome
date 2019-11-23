@@ -1,3 +1,16 @@
+<?php
+// connect to the DB
+include_once 'db.php';
+session_start();
+// checks connection, othewrise stop running script and throw error.
+if (!$conn) {
+    die("Connection failed: " . mysqli_error());
+}
+if(($_SESSION['loggedIn'] = true) && $_SESSION['role'] == "admin") {
+} else {
+    header("location: login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="eng">
     <head>
@@ -8,7 +21,6 @@
         <title>Admin's Report</title>
     </head>
     <body>
-        <h1>Admin's Report</h1>
         <nav class="nav">
             <ul>
                 <li><a href="addinfo.php">Home</a></li>
@@ -18,9 +30,9 @@
                 <li><a href="regapproval.php">Registration Approval</a></li>
                 <li><a href="roster.php">Roster</a></li>
                 <li><a href="adminreport.php">Admin's Report</a></li>
-                <li><a href="payment.php">Payment</a></li>
             </ul>
         </nav>
+        <h1>Admin's Report</h1>
         <form action="" method="POST">
             <label>Date: </label><input type="text" name="date" /><br>
             <input type="submit" name="missedPatientActivity" value="Missed Patient Activity">    

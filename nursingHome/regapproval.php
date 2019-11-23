@@ -5,7 +5,13 @@ include_once 'db.php';
 if (!$conn) {
     die("Connection failed: " . mysqli_error());
 }
+session_start();
+if(($_SESSION['loggedIn'] = true) && $_SESSION['role'] == "admin") {
+} else {
+    header("location: login.php");
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -16,7 +22,6 @@ if (!$conn) {
         <title>Registration Approval</title>
     </head>
     <body>
-        <h1>Registration Approval</h1>
         <nav class="nav">
             <ul>
                 <li><a href="addinfo.php">Home</a></li>
@@ -29,6 +34,7 @@ if (!$conn) {
                 <li><a href="payment.php">Payment</a></li>
             </ul>
         </nav>
+        <h1>Registration Approval</h1>
 
         <?php
             $query = "SELECT * FROM `users` WHERE is_approved='0'";

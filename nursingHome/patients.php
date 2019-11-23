@@ -5,7 +5,14 @@ include_once 'db.php';
 if (!$conn) {
     die("Connection failed: " . mysqli_error());
 }
+session_start();
+if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SESSION['role'] == "admin") {
+    
+} else {
+    header("location: login.php");
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,24 +24,36 @@ if (!$conn) {
         <title>Patients</title>
     </head>
     <body>
-        <h1>Patients Chart</h1>
-        <nav class="nav">
-            <ul>
-                <li><a href="addinfo.php">Home</a></li>
-                <li><a href="role.php">Roles</a></li>
-                <li><a href="employee.php">Employee</a></li>
-                <li><a href="patients.php">Patients</a></li>
-                <li><a href="regapproval.php">Registration Approval</a></li>
-                <li><a href="roster.php">Roster</a></li>
-                <li><a href="adminreport.php">Admin's Report</a></li>
-                <li><a href="payment.php">Payment</a></li>
-            </ul>
-        </nav>
+
+        <?php
+        if ($_SESSION['role'] =="supervisor"){
+        echo '<nav class="nav">';
+        echo    '<ul>';
+        echo       '<li><a href="roster.php">Home</a></li>';
+        echo     '<li><a href="newroster.php">New Roster</a></li>';
+        echo   '</ul>';
+        echo '</nav>';
+        }
+        if ($_SESSION['role'] =="admin") {
+        echo   '<ul>';
+        echo   ' <li><a href="addinfo.php">Home</a></li>';
+        echo        '<li><a href="role.php">Roles</a></li>';
+        echo        '<li><a href="employee.php">Employee</a></li>';
+        echo        '<li><a href="patients.php">Patients</a></li>';
+        echo       '<li><a href="regapproval.php">Registration Approval</a></li>';
+        echo       '<li><a href="roster.php">Roster</a></li>';
+        echo        '<li><a href="adminreport.php">Admin Report</a></li>';
+        echo   '</ul>';
+        }
+        ?>  
+       <h1>Patients Chart</h1>
+      
         <?php
             $query = "SELECT * FROM Patients";
             $result = mysqli_query($conn, $query);
 
             echo "<form action='' method='POST'>";
+            
                 echo "<table>
                     <tr>
                         <th>ID</th>
@@ -132,6 +151,7 @@ if (!$conn) {
                 }
             }
         ?>
+        
         <a href="logout.php">Logout</a>
     </body>
 </html>
