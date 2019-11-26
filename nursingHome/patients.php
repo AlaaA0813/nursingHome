@@ -26,24 +26,24 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SE
     <body>
 
         <?php
-        if ($_SESSION['role'] =="supervisor"){
-        echo '<nav class="nav">';
-        echo    '<ul>';
-        echo       '<li><a href="roster.php">Home</a></li>';
-        echo     '<li><a href="newroster.php">New Roster</a></li>';
-        echo   '</ul>';
-        echo '</nav>';
+        if ($_SESSION['role'] == "supervisor"){
+            echo '<nav class="nav">';
+                echo '<ul>';
+                    echo '<li><a href="roster.php">Home</a></li>';
+                    echo '<li><a href="newroster.php">New Roster</a></li>';
+                echo '</ul>';
+            echo '</nav>';
         }
-        if ($_SESSION['role'] =="admin") {
-        echo   '<ul>';
-        echo   ' <li><a href="addinfo.php">Home</a></li>';
-        echo        '<li><a href="role.php">Roles</a></li>';
-        echo        '<li><a href="employee.php">Employee</a></li>';
-        echo        '<li><a href="patients.php">Patients</a></li>';
-        echo       '<li><a href="regapproval.php">Registration Approval</a></li>';
-        echo       '<li><a href="roster.php">Roster</a></li>';
-        echo        '<li><a href="adminreport.php">Admin Report</a></li>';
-        echo   '</ul>';
+        if ($_SESSION['role'] == "admin") {
+            echo '<ul>';
+                echo '<li><a href="addinfo.php">Home</a></li>';
+                echo '<li><a href="role.php">Roles</a></li>';
+                echo '<li><a href="employee.php">Employee</a></li>';
+                echo '<li><a href="patients.php">Patients</a></li>';
+                echo '<li><a href="regapproval.php">Registration Approval</a></li>';
+                echo '<li><a href="roster.php">Roster</a></li>';
+                echo '<li><a href="adminreport.php">Admin Report</a></li>';
+            echo '</ul>';
         }
         ?>  
        <h1>Patients Chart</h1>
@@ -94,13 +94,13 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SE
                         echo "</tr>";
                     }
                     if (isset($_POST['search'])) {
-                        $srchID = $_POST['srchID'];
-                        $srchfName = $_POST['srchfName'];
-                        $srchlName = $_POST['srchlName'];
-                        $srchAge = $_POST['srchAge'];
-                        $srchEContactPhone = $_POST['srchEContactPhone'];
-                        $srchFamilyRelation = $_POST['srchFamilyRelation'];
-                        $srchAdmissionDate = $_POST['srchAdmissionDate'];
+                        $srchID = $_POST['srchID'] ?? '';
+                        $srchfName = $_POST['srchfName'] ?? '';
+                        $srchlName = $_POST['srchlName'] ?? '';
+                        $srchAge = $_POST['srchAge'] ?? '';
+                        $srchEContactPhone = $_POST['srchEContactPhone'] ?? '';
+                        $srchFamilyRelation = $_POST['srchFamilyRelation'] ?? '';
+                        $srchAdmissionDate = $_POST['srchAdmissionDate'] ?? '';
 
                         if ($srchID != '') {
                             $result = $getPatientInfo . " AND users.ID LIKE '%$srchID%'";
@@ -111,7 +111,6 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SE
                         if ($srchlName != '') {
                             $result = $getPatientInfo . " AND users.lastname LIKE '%$srchlName%'";
                         }
-
                         if ($srchFamilyRelation != '') {
                             $result = $getPatientInfo . " AND patients.familyrelation LIKE '%$srchFamilyRelation%'";
                         }
