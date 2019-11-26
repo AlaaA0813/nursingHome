@@ -1,3 +1,16 @@
+<?php
+// connect to the DB
+include_once 'db.php';
+session_start();
+// checks connection, othewrise stop running script and throw error.
+if (!$conn) {
+    die("Connection failed: " . mysqli_error());
+}
+if(($_SESSION['loggedIn'] = true) && $_SESSION['role'] == "family") {
+} else {
+    header("location: login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="eng">
     <head>
@@ -8,8 +21,8 @@
         <title>Family Member's Home</title>
     </head>
     <body>
-        <h1>Family Member's Home</h1>
         <form action="" method="POST">
+        <h1>Family Member's Home</h1>
             <label>Date: </label><input type="text" name="Date" /><br>
             <label>Family Code: </label><input type="text" name="Family Code" /><br>
             <label>Patient ID: </label><input type="text" name="Patient ID" /><br>
@@ -37,6 +50,7 @@
                     <td><input type="checkbox" name="dinner" /></td>
                 </tr>
             </table>
+            <a href="logout.php">Logout</a>
         </form>
     </body>
 </html>

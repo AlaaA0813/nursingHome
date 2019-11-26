@@ -1,4 +1,16 @@
-<!DOCTYPE html>
+<?php
+// connect to the DB
+include_once 'db.php';
+session_start();
+// checks connection, othewrise stop running script and throw error.
+if (!$conn) {
+    die("Connection failed: " . mysqli_error());
+}
+if(($_SESSION['loggedIn'] = true) && $_SESSION['role'] == "patient") {
+} else {
+    header("location: login.php");
+}
+?><!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -8,20 +20,14 @@
         <title>Payment</title>
     </head>
     <body>
-        <h1>Payment</h1>
         <nav class="nav">
             <ul>
-                <li><a href="addinfo.php">Home</a></li>
-                <li><a href="role.php">Roles</a></li>
-                <li><a href="employee.php">Employee</a></li>
-                <li><a href="patients.php">Patients</a></li>
-                <li><a href="regapproval.php">Registration Approval</a></li>
-                <li><a href="roster.php">Roster</a></li>
-                <li><a href="adminreport.php">Admin's Report</a></li>
+                <li><a href="patienthome.php">Home</a></li>
                 <li><a href="payment.php">Payment</a></li>
             </ul>
         </nav>
         <form action="" method="POST">
+        <h1>Payment</h1>
             <label>Patient ID: </label><input type="text" name="patientID" /><br>
             <label>Total Due: </label><input type="text" name="totalDue" /><br>
             <label>New Payment: </label><input type="text" name="newPayment" /><br>
@@ -32,6 +38,7 @@
             </ul><br>
             <input type="submit" name="makePayment" value="Make Payment">
             <input type="submit" name="cancel" value="Cancel">
+            <a href="logout.php">Logout</a>
         </form>
     </body>
 </html>

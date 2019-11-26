@@ -20,11 +20,41 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
             $_SESSION['ID'] = $row['ID'];
             $_SESSION['role'] = $row['role'];
             $_SESSION['firstname'] = $row['firstname'];
-            $_SESSION['lastname']= $row['lastname'];
-            
-            header("Location: welcome.php");
-            echo "you have logged in!";
-        
+            $_SESSION['lastname']= $row['lastname']; 
+
+            if  ($_SESSION['email'] = $row['email'] && $_SESSION['password'] = $row['password']) {
+                $_SESSION['loggedIn'] = true;
+            }
+            if($_SESSION['role']== 'admin') {
+                
+                header("Location: addinfo.php");
+                echo "you have logged in!";
+            }
+            if($_SESSION['role']== 'supervisor') {
+                
+                header("Location: roster.php");
+                echo "you have logged in!";
+            }
+            if($_SESSION['role']== 'caregiver') {
+                
+                header("Location: carehome.php");
+                echo "you have logged in!";
+            }
+            if($_SESSION['role']== 'doctor') {
+                
+                header("Location: doctorhome.php");
+                echo "you have logged in!";
+            }
+            if($_SESSION['role']== 'patient') {
+                
+                header("Location: patienthome.php");
+                echo "you have logged in!";
+            }
+            if($_SESSION['role']== 'family') {
+                
+                header("Location: famhome.php");
+                echo "you have logged in!";
+            }
         }
     } else if (($_POST['email'] == '') || ($_POST['password'] == '')) {
         echo "<p>You did not enter a username or password.</p>";

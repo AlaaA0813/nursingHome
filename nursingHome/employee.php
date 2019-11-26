@@ -1,9 +1,14 @@
 <?php 
 // connect to the DB
 include_once 'db.php';
+session_start();
 // checks connection, othewrise stop running script and throw error.
 if (!$conn) {
     die("Connection failed: " . mysqli_error());
+}
+if(($_SESSION['loggedIn'] = true) && $_SESSION['role'] == "admin") {
+} else {
+    header("location: login.php");
 }
 ?>
 <!DOCTYPE html>
@@ -16,7 +21,6 @@ if (!$conn) {
         <title>Employees</title>
     </head>
     <body>
-    <h1>Employees</h1>
     <nav class="nav">
             <ul>
                 <li><a href="addinfo.php">Home</a></li>
@@ -26,10 +30,9 @@ if (!$conn) {
                 <li><a href="regapproval.php">Registration Approval</a></li>
                 <li><a href="roster.php">Roster</a></li>
                 <li><a href="adminreport.php">Admin's Report</a></li>
-                <li><a href="payment.php">Payment</a></li>
             </ul>
         </nav>
-    <form action='employee.php' method='POST'>
+        <h1>Employees</h1>
     <table>
         <tr>
           <th>ID</th>
@@ -50,13 +53,14 @@ if (!$conn) {
                     </tr>";
             }
             echo "
+            <form action='employee.php' method='POST'>'
             <label>Employee ID: </label>
                 <input type='number' name='ID'>
             <br>
             <label>New Salary: </label>
                 <input type='number' name='salary'>
             <br>
-            <button type='submit' name='update'>Update</button>";
+            <input type='submit' value='update' name='update'>Update</input>";
             //add cancel button            
     
         if (isset($_POST['update'])) {
@@ -72,10 +76,12 @@ if (!$conn) {
             }
             }
         }
+        echo '</form>';
             mysqli_close($conn); //close connection
     ?>
             </table>
-        </form>
+            <a href="logout.php">Logout</a>
+        
     </body>
     </html>
 

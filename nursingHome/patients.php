@@ -5,7 +5,14 @@ include_once 'db.php';
 if (!$conn) {
     die("Connection failed: " . mysqli_error());
 }
+session_start();
+if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SESSION['role'] == "admin") {
+    
+} else {
+    header("location: login.php");
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,20 +24,32 @@ if (!$conn) {
         <title>Patients</title>
     </head>
     <body>
-        <h1>Patients Chart</h1>
-        <nav class="nav">
-            <ul>
-                <li><a href="addinfo.php">Home</a></li>
-                <li><a href="role.php">Roles</a></li>
-                <li><a href="employee.php">Employee</a></li>
-                <li><a href="patients.php">Patients</a></li>
-                <li><a href="regapproval.php">Registration Approval</a></li>
-                <li><a href="roster.php">Roster</a></li>
-                <li><a href="adminreport.php">Admin's Report</a></li>
-                <li><a href="payment.php">Payment</a></li>
-            </ul>
-        </nav>
+
         <?php
+        if ($_SESSION['role'] =="supervisor"){
+        echo '<nav class="nav">';
+        echo    '<ul>';
+        echo       '<li><a href="roster.php">Home</a></li>';
+        echo     '<li><a href="newroster.php">New Roster</a></li>';
+        echo   '</ul>';
+        echo '</nav>';
+        }
+        if ($_SESSION['role'] =="admin") {
+        echo   '<ul>';
+        echo   ' <li><a href="addinfo.php">Home</a></li>';
+        echo        '<li><a href="role.php">Roles</a></li>';
+        echo        '<li><a href="employee.php">Employee</a></li>';
+        echo        '<li><a href="patients.php">Patients</a></li>';
+        echo       '<li><a href="regapproval.php">Registration Approval</a></li>';
+        echo       '<li><a href="roster.php">Roster</a></li>';
+        echo        '<li><a href="adminreport.php">Admin Report</a></li>';
+        echo   '</ul>';
+        }
+        ?>  
+       <h1>Patients Chart</h1>
+      
+        <?php
+
             $getPatientInfo = "SELECT users.ID, firstname, lastname, dob, econtactnum, familyrelation, admission_date FROM `users` INNER JOIN `patients` ON users.ID = patients.ID WHERE users.role = 'patient'";
             $result = mysqli_query($conn, $getPatientInfo);
             $resultCheck = mysqli_num_rows($result);
@@ -47,7 +66,7 @@ if (!$conn) {
                     <th>Admission Date</th>
                 </tr>";
                 echo "<form action='' method='POST'>";
-                    echo "<tr>";
+                     echo "<tr>";
                         echo "<td><input type='text' placeholder='Search By ID' name='srchID' /></td>";
                         echo "<td><input type='text' placeholder='Search By First Name' name='srchfName' /></td>";
                         echo "<td><input type='text' placeholder='Search By Last Name' name='srchlName' /></td>";
@@ -142,5 +161,7 @@ if (!$conn) {
             echo "</table>";
 
         ?>
+        
+        <a href="logout.php">Logout</a>
     </body>
 </html>
