@@ -12,6 +12,7 @@ if(($_SESSION['loggedIn'] = true) && $_SESSION['role'] == "admin") {
     header("location: login.php");
 }
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +38,27 @@ if(($_SESSION['loggedIn'] = true) && $_SESSION['role'] == "admin") {
         <h1>Admin's Home</h1>
         <h2>Additional Information of Patient</h2>
         <form action="" method="POST">
-            <label>Patient ID: </label><input type="text" name="patientID" /><br>
+        <? 
+  \
+            $firstname = $_POST['firstname'] ?? '';
+            $lastname = $_POST['lastname'] ?? '';
+
+            $dataquery = "SELECT patient_id FROM `patients` WHERE `patient_id` = '$patientID'";
+            $result = mysqli_query($conn,$dataquery);
+            $resultcheck = mysqli_fetch_assoc($result);
+            $nameID = $resultcheck['patientID'];
+            $selectName = "SELECT firstname, lastname FROM `users` WHERE `ID` = '$nameID'";
+           
+            
+
+
+
+        ?>
+            <label>Patient ID: </label>
+            <input type="number" name="patientID" value="<?php echo $resultcheck['patientID'];  ?>"><br>
+            <input type="submit" value="search" name="search">
+            <label>Patient Name: <?php echo $nameID['firstname'] . " " . $nameID['lastname']; ?></label>
+
             <label>Group: </label><input type="text" name="group" /><br>
             <select name="group">
             <option> Choose Which Group: </option>
