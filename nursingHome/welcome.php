@@ -1,9 +1,7 @@
 <?php 
 
 session_start(); 
-
 include_once 'db.php';
-
 
 ?>
 
@@ -36,7 +34,7 @@ include_once 'db.php';
                     include ("famhome.php"); 
                 }
             }
+            
         ?>
-
     </body>
 </html>

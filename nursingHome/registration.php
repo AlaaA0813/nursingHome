@@ -17,6 +17,7 @@ if (isset($_POST['register'])) {
     $familycode = $_POST['familycode'] ?? '';
     $econtactnum = $_POST['econtactnum'] ?? '';
     $familyrelation = $_POST['familyrelation'] ?? '';
+
     
     if ($role != 'patient') {
         if (($role != '') && ($firstname != '') && ($lastname != '') && ($email != '') && ($password != '') && ($phonenumber != '') && ($dob != '')) {
@@ -24,7 +25,7 @@ if (isset($_POST['register'])) {
             if (mysqli_query($conn, $insertUsers)) {
                 echo "Congratulations, you have registered! Please wait for approval.";
             } else {
-                echo " Error with registering." . mysqli_error($conn);
+                echo "Error with registering." . mysqli_error($conn);
             }
         }
     }
@@ -43,7 +44,7 @@ if (isset($_POST['register'])) {
                 if (mysqli_query($conn, $insertPatients)) {
                 echo "Congratulations, you have registered!  Please wait for approval.";
                 } else {
-                    echo " Error with registering." . mysqli_error($conn);
+                    echo "Error with registering." . mysqli_error($conn);
                 }
             }
         }
@@ -135,8 +136,8 @@ mysqli_close($conn)
                 </select><br>
             <label>First Name: </label><input type="text" name="firstname" /><br>
             <label>Last Name: </label><input type="text" name="lastname" /><br>
-            <label>Email: </label><input type="text" name="email" /><br>
-            <label>Password: </label><input type="text" name="password" /><br>
+            <label>Email: </label><input type="email" name="email" /><br>
+            <label>Password: </label><input type="password" name="password" /><br>
             <label>Phone Number: </label><input type="text" name="phonenumber" /><br>
             <label>Date of Birth: </label><input type="date" name="dob" /><br>
             <label>Family Code (For Patient Family Member): </label><input type="text" name="familycode" id="familycode" disabled="disabled"><br>

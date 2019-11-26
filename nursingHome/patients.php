@@ -31,106 +31,116 @@ if (!$conn) {
             </ul>
         </nav>
         <?php
-            $query = "SELECT * FROM Patients";
-            $result = mysqli_query($conn, $query);
-
-            echo "<form action='' method='POST'>";
-                echo "<table>
-                    <tr>
-                        <th>ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Age</th>
-                        <th>Emergency Contact Name</th>
-                        <th>Emergency Contact Phone Number</th>
-                        <th>Admission Date</th>
-                    </tr>";
-                echo "<tr>";
-                    echo "<td><input type='text' name='srchID' /></td>";
-                    echo "<td><input type='text' name='srchfName' /></td>";
-                    echo "<td><input type='text' name='srchlName' /></td>";
-                    echo "<td><input type='text' name='srchAge' /></td>";
-                    echo "<td><input type='text' name='srchEContactName' /></td>";
-                    echo "<td><input type='text' name='srchemEContactPhone' /></td>";
-                    echo "<td><input type='text' name='srchAdmissionDate' /></td>";
-                    echo "<td><input type='submit' name='search' value='Search'/></td>";
-                echo "</tr>";
-                while ($row = mysqli_fetch_array($result)) {
+            $getPatientInfo = "SELECT users.ID, firstname, lastname, dob, econtactnum, familyrelation, admission_date FROM `users` INNER JOIN `patients` ON users.ID = patients.ID WHERE users.role = 'patient'";
+            $result = mysqli_query($conn, $getPatientInfo);
+            $resultCheck = mysqli_num_rows($result);
+    
+           
+            echo "<table>";
+                echo "<tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Age</th>
+                    <th>Emergency Contact Phone Number</th>
+                    <th>Emergency Contact Family Relation</th>
+                    <th>Admission Date</th>
+                </tr>";
+                echo "<form action='' method='POST'>";
                     echo "<tr>";
-                        echo "<td name='id'>" . $row['ID'] . "</td>";
-                        echo "<td name='firstName'>" . $row['firstname'] . "</td>";
-                        echo "<td name='lastName'>" . $row['lastname'] . "</td>";
-                        echo "<td name='age'>" . $row['age'] . "</td>";
-                        echo "<td name='econtactname'>" . $row['econtactname'] . "</td>";
-                        echo "<td name='econtact'>" . $row['econtact'] . "</td>";
-                        echo "<td name='admissionDate'>" . $row['admission_date'] . "</td>";
+                        echo "<td><input type='text' placeholder='Search By ID' name='srchID' /></td>";
+                        echo "<td><input type='text' placeholder='Search By First Name' name='srchfName' /></td>";
+                        echo "<td><input type='text' placeholder='Search By Last Name' name='srchlName' /></td>";
+                        echo "<td><input type='text' placeholder='Search By Age' name='srchAge' /></td>"; 
+                        echo "<td><input type='text' placeholder='Search By Emergency Contact Phone Number' name='srchEContactPhone' /></td>";
+                        echo "<td><input type='text' placeholder='Search By Family Relation' name='srchFamilyRelation' /></td>";
+                        echo "<td><input type='text' placeholder='Search By Admission Date' name='srchAdmissionDate' /></td>";
+                        echo "<td><input type='submit' name='search' value='Search'/></td>";
                     echo "</tr>";
-                }
-                echo "</table>";
-            echo "</form>";
-            
-            if (isset($_POST['search'])) {
-                if (isset($_POST['srchID'])) {
-                    $id = mysqli_real_escape_string($conn, htmlspecialchars($_POST['srchID']));
-                    $srchID = "SELECT * FROM patients WHERE ID LIKE '{$_POST['srchID']}%'";
-                    $result = mysqli_query($conn, $srchID);
-                    echo $result;
-                }
-            }
+                echo "</form>";
+                if ($resultCheck > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $patientBirth = $row['dob'];
+                        $today = date("Y-m-d");
+                        $dateDiff = date_diff(date_create($patientBirth), date_create($today));
+                        $patientAge = $dateDiff->format('%y');
+                        echo "<tr>";
+                            echo "<td name='id'>" . $row['ID'] . "</td>";
+                            echo "<td name='firstName'>" . $row['firstname'] . "</td>";
+                            echo "<td name='lastName'>" . $row['lastname'] . "</td>";
+                            echo "<td name='age'>$patientAge</td>";
+                            echo "<td name='econtactnum'>" . $row['econtactnum'] . "</td>";
+                            echo "<td name='familyrelation'>" . $row['familyrelation'] . "</td>";
+                            echo "<td name='admissionDate'>" . $row['admission_date'] . "</td>";
+                        echo "</tr>";
+                    }
+                    if (isset($_POST['search'])) {
+                        $srchID = $_POST['srchID'];
+                        $srchfName = $_POST['srchfName'];
+                        $srchlName = $_POST['srchlName'];
+                        $srchAge = $_POST['srchAge'];
+                        $srchEContactPhone = $_POST['srchEContactPhone'];
+                        $srchFamilyRelation = $_POST['srchFamilyRelation'];
+                        $srchAdmissionDate = $_POST['srchAdmissionDate'];
 
-            if (isset($_POST['search'])) {
-                if (isset($_POST['srchfName'])) {
-                    $id = mysqli_real_escape_string($conn, htmlspecialchars($_POST['srchfName']));
-                    $srchfName = "SELECT * FROM patients WHERE firstname LIKE '{$_POST['srchfName']}%'";
-                    $result = mysqli_query($conn, $srchfName);
-                    echo $result;
-                }
-            }
+                        if ($srchID != '') {
+                            $result = $getPatientInfo . " AND users.ID LIKE '%$srchID%'";
+                        }
+                        if ($srchfName != '') {
+                            $result = $getPatientInfo . " AND users.firstname LIKE '%$srchfName%'";
+                        }
+                        if ($srchlName != '') {
+                            $result = $getPatientInfo . " AND users.lastname LIKE '%$srchlName%'";
+                        }
 
-            if (isset($_POST['search'])) {
-                if (isset($_POST['srchlName'])) {
-                    $id = mysqli_real_escape_string($conn, htmlspecialchars($_POST['srchlName']));
-                    $srchlName = "SELECT * FROM patients WHERE lastname LIKE '{$_POST['srchlName']}%'";
-                    $result = mysqli_query($conn, $srchlName);
-                    echo $result;
+                        if ($srchFamilyRelation != '') {
+                            $result = $getPatientInfo . " AND patients.familyrelation LIKE '%$srchFamilyRelation%'";
+                        }
+                        if ($srchAge != '') {
+                            $currentYear = date("Y-m-d");
+                            $birthDate = $currentYear - $patientAge;
+                            $result = $getPatientInfo . " AND users.dob LIKE '$birthDate%'";
+                        }
+                        if ($srchEContactPhone != '') {
+                            $result = $getPatientInfo . " AND patients.econtactnum LIKE '%$srchEContactPhone%'";
+                        }
+                        if ($srchAdmissionDate != '') {
+                            $result = $getPatientInfo . " AND patients.admission_date LIKE '%$srchAdmissionDate%'";
+                        }
+                        $showSrchResult = mysqli_query($conn, $result);
+                        $resultCheck = mysqli_num_rows($showSrchResult);
+                        if ($resultCheck > 0) {
+                            echo "<table>";
+                                echo "<tr>
+                                    <th>ID</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Age</th>
+                                    <th>Emergency Contact Phone Number</th>
+                                    <th>Emergency Contact Family Relation</th>
+                                    <th>Admission Date</th>
+                                </tr>";
+                            while ($row = mysqli_fetch_assoc($showSrchResult)) {
+                                $patientBirth = $row['dob'];
+                                $today = date("Y-m-d");
+                                $dateDiff = date_diff(date_create($patientBirth), date_create($today));
+                                $patientAge = $dateDiff->format('%y');
+                                echo "<tr>";
+                                    echo "<td name='id'>" . $row['ID'] . "</td>";
+                                    echo "<td name='firstName'>" . $row['firstname'] . "</td>";
+                                    echo "<td name='lastName'>" . $row['lastname'] . "</td>";
+                                    echo "<td name='age'>$patientAge</td>";
+                                    echo "<td name='econtactnum'>" . $row['econtactnum'] . "</td>";
+                                    echo "<td name='familyrelation'>" . $row['familyrelation'] . "</td>";
+                                    echo "<td name='admissionDate'>" . $row['admission_date'] . "</td>";
+                                echo "</tr>";
+                            }
+                            echo "</table";
+                        }
+                    }
                 }
-            }
+            echo "</table>";
 
-            if (isset($_POST['search'])) {
-                if (isset($_POST['srchAge'])) {
-                    $id = mysqli_real_escape_string($conn, htmlspecialchars($_POST['srchAge']));
-                    $srchAge = "SELECT * FROM patients WHERE age LIKE '{$_POST['srchAge']}%'";
-                    $result = mysqli_query($conn, $srchAge);
-                    echo $result;
-                }
-            }
-
-            if (isset($_POST['search'])) {
-                if (isset($_POST['srchEContactName'])) {
-                    $id = mysqli_real_escape_string($conn, htmlspecialchars($_POST['srchEContactName']));
-                    $srchEContactName = "SELECT * FROM patients WHERE econtactname LIKE '{$_POST['srchEContactName']}%'";
-                    $result = mysqli_query($conn, $srchEContactName);
-                    echo $result;
-                }
-            }
-
-            if (isset($_POST['search'])) {
-                if (isset($_POST['srchEContactPhone'])) {
-                    $id = mysqli_real_escape_string($conn, htmlspecialchars($_POST['srchEContactPhone']));
-                    $srchEContactPhone = "SELECT * FROM patients WHERE econtact LIKE '{$_POST['srchEContactPhone']}%'";
-                    $result = mysqli_query($conn, $srchEContactPhone);
-                    echo $result;
-                }
-            }
-
-            if (isset($_POST['search'])) {
-                if (isset($_POST['srchAdmissionDate'])) {
-                    $id = mysqli_real_escape_string($conn, htmlspecialchars($_POST['srchAdmissionDate']));
-                    $srchAdmissionDate = "SELECT * FROM patients WHERE admission_date LIKE '{$_POST['srchAdmissionDate']}%'";
-                    $result = mysqli_query($conn, $srchAdmissionDate);
-                    echo $result;
-                }
-            }
         ?>
     </body>
 </html>
