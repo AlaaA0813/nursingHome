@@ -37,42 +37,53 @@ if(($_SESSION['loggedIn'] = true) && $_SESSION['role'] == "admin") {
         </nav>
         <h1>Admin's Home</h1>
         <h2>Additional Information of Patient</h2>
-        <form action="" method="POST">
-        <? 
 
-        $firstname = $_POST['firstname'] ?? '';
-        $lastname = $_POST['lastname'] ?? '';
-        $admission_date = $_POST['admission_date'] ?? '';
-        $group = $_POST['group'] ?? '';
-        //number entered by admin
-        $grabpatient = $_POST['grabpatient'] ?? '';
-        $selectid = "SELECT * FROM patient WHERE patient_id = '$grabpatient'";
-        $result = mysqli_query($conn,$selectid);
-        $resultcheck = mysqli_fetch_assovs
-           
+        <!--show before entering data then the rest pops up after ID entered-->
+        <form method="POST">
+        <label for="patient_id">Enter Patient ID: </label>
+            <input type="number" name="patient_id" value="<?php echo $_POST['patient_id'] ?? ''; ?>"><br>
+            <input type="submit" name="grab_patient">
+        </form>
+
+
+         <?php
+         //if entered number select name from users table and match the ID
+        if (isset($_POST['grab_patient'])) {
+            $patient_id = $_POST['patient_id'];
+            $selectQuery = "SELECT users.firstname, users.lastname FROM users JOIN patients ON users.ID = patients.ID WHERE patients.ID = $patient_id;";
+            $result = mysqli_query($conn,$selectQuery);
+            $resultCheck = mysqli_fetch_assoc($result);
+
+            echo "
+                <form method='post'>
+                <!--shows name of PATIENT-->
+                    <p>Patient Name: ".$resultCheck['firstname'].' '.$resultCheck['lastname']."</p>
+                    <label for'patient_id'>Patient ID</label>
+                    <input type='text' name='patient_id' value='$patient_id'required readonly>
+                    <label for='group'>Group</label>
+                    <input type='number' name='group' required>
+                    <label for='admission_date'>Admission Date</label>
+                    <input type='date' name='admission_date' required>
+                    <input type='submit' name='update'>
+                </form>
+                ";
+        } 
+
+
+        //add patient info to table
+        
+        if (isset($_POST['update'])) {
+            $patient_id = $_POST['patient_id'];
+            $group = $_POST['group'];
+            $admission_date = $_POST['admission_date'];
             
-
-
-
-        ?>
-            <label>Patient ID: </label>
-            <input type="number" name="grabpatient" value="<?php echo $resultcheck['patientID'];  ?>"><br>
-            <input type="submit" value="search" name="search">
-            <label>Patient Name: <?php echo $nameID['firstname'] . " " . $nameID['lastname']; ?></label>
-
-            <label>Group: </label>
-            <select name="group">
-            <option> Choose Which Group: </option>
-            <option value="1"> 1 </option>
-            <option value="2"> 2 </option>
-            <option value="3"> 3 </option>
-            <option value="4"> 4 </option>
-
-        </select>  
-    <br>
-            <label>Admission Date: </label><input type="text" name="admission_date" /><br>
-            <input type="submit" name="ok" value="OK">
-            <input type="submit" name="cancel" value="Cancel">
+            $dataQuery = "UPDATE patients SET groupnum = $group, admission_date= '$admission_date' WHERE patients.ID = $patient_id;";
+            mysqli_query($conn,$dataQuery);
+        }
+    
+?> 
+            
+            
 
             <a href="logout.php">Logout</a>
         </form>
