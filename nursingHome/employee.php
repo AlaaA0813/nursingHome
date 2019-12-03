@@ -44,43 +44,43 @@ if(($_SESSION['loggedIn'] = true) && $_SESSION['role'] == "admin") {
             $query = mysqli_query($conn, "SELECT employees.ID, employees.salary, users.role, users.firstname, users.lastname FROM employees, users WHERE employees.ID = users.ID");
             $i = 1;
             while($row = mysqli_fetch_array($query)){
-            echo "
-                    <tr>
-                    <td name='ID'>" . $row['ID'] . "</td>
-                    <td name='name'>" . $row['firstname'] . '&nbsp;' . $row['lastname'] . "</td>
-                    <td name='role'>" . $row['role'] . "</td>
-                    <td name='salary'>" . $row['salary'] . "</td>
-                    </tr>";
+                echo "
+                        <tr>
+                        <td name='ID'>" . $row['ID'] . "</td>
+                        <td name='name'>" . $row['firstname'] . '&nbsp;' . $row['lastname'] . "</td>
+                        <td name='role'>" . $row['role'] . "</td>
+                        <td name='salary'>" . $row['salary'] . "</td>
+                        </tr>";
             }
             echo "
-            <form action='employee.php' method='POST'>'
-            <label>Employee ID: </label>
-                <input type='number' name='ID'>
-            <br>
-            <label>New Salary: </label>
-                <input type='number' name='salary'>
-            <br>
-            <input type='submit' value='update' name='update'>Update</input>";
-            //add cancel button            
-    
-        if (isset($_POST['update'])) {
-            $ID = $_POST['ID'];
-            $salary = $_POST['salary'];
-            if (($ID != '') && ($salary != '')) {
-            $insertQuery = "UPDATE employees SET salary = '$salary' WHERE ID = '$ID'";
-            if (mysqli_query($conn, $insertQuery)) {
-                echo "Your salary has been updated";
+                <form action='employee.php' method='POST'>
+                <label>Employee ID: </label>
+                    <input type='number' name='ID'>
+                <br>
+                <label>New Salary: </label>
+                    <input type='number' name='salary'>
+                <br>
+                <input type='submit' value='Update' name='update'>";
+                //add cancel button            
+        
+            if (isset($_POST['update'])) {
+                $ID = $_POST['ID'];
+                $salary = $_POST['salary'];
+                if (($ID != '') && ($salary != '')) {
+                    $insertQuery = "UPDATE employees SET salary = '$salary' WHERE ID = '$ID'";
+                    if (mysqli_query($conn, $insertQuery)) {
+                        echo "Your salary has been updated";
+                    } else {
+                        echo "Error updating your salary" . mysqli_error($conn);
+                    }
+                }
+                header('Location:  employee.php');
             }
-            else {
-                echo "Error updating your salary" . mysqli_error($conn);
-            }
-            }
-        }
-        echo '</form>';
-            mysqli_close($conn); //close connection
-    ?>
-            </table>
-            <a href="logout.php">Logout</a>
+            echo '</form>';
+                mysqli_close($conn); //close connection
+        ?>
+    </table>
+    <a href="logout.php">Logout</a>
         
     </body>
     </html>

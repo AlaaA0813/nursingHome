@@ -20,11 +20,20 @@ if (isset($_POST['register'])) {
     $econtactnum = $_POST['econtactnum'] ?? '';
     $familyrelation = $_POST['familyrelation'] ?? '';
 
-    
-    if ($role != 'patient') {
-        if (($role != '') && ($firstname != '') && ($lastname != '') && ($email != '') && ($password != '') && ($phonenumber != '') && ($dob != '')) {
-            $insertUsers = "INSERT INTO `users` (role, firstname, lastname, email, password, phonenumber, dob) VALUES ('$role', '$firstname', '$lastname', '$email', '$password', '$phonenumber', '$dob')";
-            if (mysqli_query($conn, $insertUsers)) {
+    if (($role != '') && ($firstname != '') && ($lastname != '') && ($email != '') && ($password != '') && ($phonenumber != '') && ($dob != '')) {
+        $insertUsers = "INSERT INTO `users` (role, firstname, lastname, email, password, phonenumber, dob) VALUES ('$role', '$firstname', '$lastname', '$email', '$password', '$phonenumber', '$dob')";
+        mysqli_query($conn, $insertUsers); 
+    }
+    if (($role != 'patient') || ($role != 'Patient Family')) {
+        $getUserID = "SELECT ID FROM `users` WHERE firstname='$firstname' AND lastname='$lastname' AND email='$email'";
+        $result = mysqli_query($conn, $getUserID);
+        $resultCheck = mysqli_num_rows($result);
+        if ($resultCheck > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $ID = $row['ID'];
+            }
+            $insertEmployee = "INSERT INTO `employees` (ID, employee_id, salary) VALUES ('$ID', '$ID', 0.00)";
+            if (mysqli_query($conn, $insertEmployee)) {
                 echo "Congratulations, you have registered! Please wait for approval.";
             } else {
                 echo "Error with registering." . mysqli_error($conn);
@@ -32,9 +41,7 @@ if (isset($_POST['register'])) {
         }
     }
     if ($role == 'patient') {
-        if (($role != '') && ($firstname != '') && ($lastname != '') && ($email != '') && ($password != '') && ($phonenumber != '') && ($dob != '') && ($familycode != '') && ($econtactnum != '') && ($familyrelation)) {
-            $insertUsers = "INSERT INTO `users` (role, firstname, lastname, email, password, phonenumber, dob) VALUES ('$role', '$firstname', '$lastname', '$email', '$password', '$phonenumber', '$dob')";
-            mysqli_query($conn, $insertUsers);
+        if (($familycode != '') && ($econtactnum != '') && ($familyrelation)) {
             $getUserID = "SELECT ID FROM `users` WHERE firstname='$firstname' AND lastname='$lastname' AND email='$email'";
             $result = mysqli_query($conn, $getUserID);
             $resultCheck = mysqli_num_rows($result);
@@ -44,7 +51,7 @@ if (isset($_POST['register'])) {
                 }
                 $insertPatients = "INSERT INTO `patients` (ID, patient_id, familycode, econtactnum, familyrelation, admission_date, groupnum, billdue) VALUES ('$ID', '$ID', '$familycode', '$econtactnum', '$familyrelation', NULL, NULL, 0.00)";
                 if (mysqli_query($conn, $insertPatients)) {
-                echo "Congratulations, you have registered!  Please wait for approval.";
+                    echo "Congratulations, you have registered!  Please wait for approval.";
                 } else {
                     echo "Error with registering." . mysqli_error($conn);
                 }
