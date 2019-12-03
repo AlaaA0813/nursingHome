@@ -31,7 +31,6 @@ if(($_SESSION['loggedIn'] = true) && $_SESSION['role'] == "admin") {
                 <li><a href="regapproval.php">Registration Approval</a></li>
                 <li><a href="roster.php">Roster</a></li>
                 <li><a href="adminreport.php">Admin's Report</a></li>
-                <li><a href="payment.php">Payment</a></li>
             </ul>
         </nav>
         <h1>Registration Approval</h1>

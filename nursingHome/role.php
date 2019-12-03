@@ -22,7 +22,6 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "admin")) {
     </head>
     <body>
     <form action='role.php' method='POST'>
-        <h1>Roles</h1>
         <nav class="nav">
             <ul>
                 <li><a href="addinfo.php">Home</a></li>
@@ -34,7 +33,7 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "admin")) {
                 <li><a href="adminreport.php">Admin's Report</a></li>
             </ul>
         </nav>
-​
+​       <h1>Roles</h1>
         <?php
             $query = "SELECT * FROM `roles`"; 
             $result = mysqli_query($conn, $query);
