@@ -35,7 +35,6 @@ if(($_SESSION['loggedIn'] = true) && $_SESSION['role'] == "admin") {
                 <li><a href="adminreport.php">Admin's Report</a></li>
             </ul>
         </nav>
-        <h1>Admin's Home</h1>
         <h2>Additional Information of Patient</h2>
 
         <!--show before entering data then the rest pops up after ID entered-->

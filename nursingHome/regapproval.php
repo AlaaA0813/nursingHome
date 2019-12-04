@@ -33,6 +33,7 @@ if(($_SESSION['loggedIn'] = true) && $_SESSION['role'] == "admin") {
                 <li><a href="adminreport.php">Admin's Report</a></li>
             </ul>
         </nav>
+        <h1>Admin's Home</h1>
         <h1>Registration Approval</h1>
 
         <?php

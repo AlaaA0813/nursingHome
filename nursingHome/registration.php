@@ -24,7 +24,7 @@ if (isset($_POST['register'])) {
         $insertUsers = "INSERT INTO `users` (role, firstname, lastname, email, password, phonenumber, dob) VALUES ('$role', '$firstname', '$lastname', '$email', '$password', '$phonenumber', '$dob')";
         mysqli_query($conn, $insertUsers); 
     }
-    if (($role != 'patient') || ($role != 'Patient Family')) {
+    if (($role != 'patient') && ($role != 'Patient Family')) {
         $getUserID = "SELECT ID FROM `users` WHERE firstname='$firstname' AND lastname='$lastname' AND email='$email'";
         $result = mysqli_query($conn, $getUserID);
         $resultCheck = mysqli_num_rows($result);
