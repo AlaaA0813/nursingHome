@@ -155,5 +155,6 @@ mysqli_close($conn)
             <input type="submit" name="register" value="Register Me">
             <input type="submit" name="cancel" value="Cancel Registration">
         </form>
+        <a href="login.php">Login</a>
     </body>
 </html>

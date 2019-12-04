@@ -34,11 +34,11 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SE
         }
         if ($_SESSION['role'] =="admin") {
         echo   '<ul>';
-        echo   ' <li><a href="addinfo.php">Home</a></li>';
+        echo   ' <li><a href="regapproval.php">Home</a></li>';
         echo        '<li><a href="role.php">Roles</a></li>';
         echo        '<li><a href="employee.php">Employee</a></li>';
         echo        '<li><a href="patients.php">Patients</a></li>';
-        echo       '<li><a href="regapproval.php">Registration Approval</a></li>';
+        echo       '<li><a href="addinfo.php">Add Patient Info</a></li>';
         echo       '<li><a href="roster.php">Roster</a></li>';
         echo        '<li><a href="adminreport.php">Admin Report</a></li>';
         echo   '</ul>';

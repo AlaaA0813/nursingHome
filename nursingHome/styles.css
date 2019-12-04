@@ -16,7 +16,7 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: blue;
+    background-color: #5f5d61;
   }
   
   li {
@@ -34,4 +34,9 @@ ul {
   /* Change the link color to #111 (black) on hover */
   li a:hover {
     background-color: pink;
+  }
+
+  html {
+    background-image: url(photos/background.gif);
+    background-size: cover;
   }
