@@ -45,74 +45,93 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SE
         }
         ?>
         <h1>Create New Roster</h1>
-        <form action="" method="POST">
-            <br><label>Date: </label><input type="text" name="date" /><br>
+        <form action="newroster.php" method="POST">
+        <?php  if (isset($_POST['add'])) {
+                    $roster_date = $_POST['roster_date'];
+                    $supervisor = $_POST['supervisor'];
+                    $doctor = $_POST['doctor'];
+                    $caregiver1 = $_POST['caregiver1'];
+                    $caregiver2 = $_POST['caregiver2'];
+                    $caregiver3 = $_POST['caregiver3'];
+                    $caregiver4 = $_POST['caregiver4'];
+                    
+                    if (($roster_date != '') && ($supervisor != '') && ($doctor != '') && ($caregiver1 != '') && ($caregiver2 != '') && ($caregiver3 != '') && ($caregiver4 != '')) {
+                        $insertRoster = "INSERT INTO daily_roster (roster_date, supervisor, doctor, caregiver1, caregiver2, caregiver3, caregiver4) VALUES ('$roster_date', '$supervisor', '$doctor', '$caregiver1', '$caregiver2', '$caregiver3, '$$caregiver4')";
+                        mysqli_query($conn, $insertRoster); 
+                        echo "Congratulations, you have made a roster";
+                    } else {
+                        echo "Error with roster." . mysqli_error($conn);
+                    }
+                }
+            ?>
+            <br><label>Date: </label><input type="date" name="roster_date" /><br>
+
             <br><label>Supervisor</label>  
-            <select name="SUPERVISORDROPDOWN"><br>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-            </select><br>
+                <select name="supervisor"><br>
+                    <?php
+                    /* fetch associative array */
+                    $result = mysqli_query($conn, "SELECT ID, firstname FROM users WHERE role = 'supervisor';");
+                    while ($row = $result->fetch_assoc()){
+                        echo '<option value=" '.$row['ID'].' "> '.$row['firstname'].' </option>';     
+                    }
+                    ?>
+                </select>
+            <br>
+
             <label>Doctor</label>  
-            <select name="DOCTORDROPDOWN"><br>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-            </select><br>
+                <select name="doctor">
+                    <?php
+                        $result = mysqli_query($conn, "SELECT ID, firstname FROM users WHERE role = 'doctor';");
+                        while ($row = $result->fetch_assoc()){
+                            echo '<option value=" '.$row['ID'].' "> '.$row['firstname'].' </option>';     
+                        }
+                    ?>
+                <br>
+                    
+                </select>
+            <br>
             <label>Caregiver1</label>  
-            <select name="CAREGIVER1DROPDOWN"><br>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-            </select>
-            <select name="CAREGIVER1DROPDOWN"><br>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-            </select><br>
-            <label>Caregiver2</label>  
-            <select name="CAREGIVER2DROPDOWN"><br>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-            </select>
-            <select name="CAREGIVER2DROPDOWN"><br>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-            </select><br>
+                <select name="caregiver1">
+                    <?php
+                        $result = mysqli_query($conn, "SELECT ID, firstname FROM users WHERE role = 'caregiver';");
+                        while ($row = $result->fetch_assoc()){
+                            echo '<option value=" '.$row['ID'].' "> '.$row['firstname'].' </option>';     
+                        }
+                    ?>
+                <br>
+                </select>
+            <label>Caregiver2</label> 
+                <select name="caregiver2">
+                    <?php
+                    $result = mysqli_query($conn, "SELECT ID, firstname FROM users WHERE role = 'caregiver';");
+                    while ($row = $result->fetch_assoc()){
+                        echo '<option value=" '.$row['ID'].' "> '.$row['firstname'].' </option>';     
+                    }
+                    ?>
+                <br>
+                </select>
+                <br>
             <label>Caregiver3</label>  
-            <select name="CAREGIVER3DROPDOWN"><br>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
+                <select name="caregiver3">
+                    <?php
+                    $result = mysqli_query($conn, "SELECT ID, firstname FROM users WHERE role = 'caregiver';");
+                    while ($row = $result->fetch_assoc()){
+                        echo '<option value=" '.$row['ID'].' "> '.$row['firstname'].' </option>';     
+                    }
+                    ?>
+                <br>
+                </select>
+            <label>Caregiver4</label> 
+                <select name="caregiver4">
+                    <?php
+                    $result = mysqli_query($conn, "SELECT ID, firstname FROM users WHERE role = 'caregiver';");
+                    while ($row = $result->fetch_assoc()){
+                        echo '<option value=" '.$row['ID'].' "> '.$row['firstname'].' </option>';     
+                    }
+                    ?>
+            <br>
             </select>
-            <select name="CAREGIVER3DROPDOWN"><br>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-            </select><br>
-            <label>Caregiver4</label>  
-            <select name="CAREGIVER4DROPDOWN"><br>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-            </select>
-            <select name="CAREGIVER4DROPDOWN"><br>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-            </select>
+            <br>
             <br><br>
             <input type="submit" name="add" value="Add">
             <input type="submit" name="cancel" value="Cancel">
