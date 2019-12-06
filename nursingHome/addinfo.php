@@ -26,16 +26,15 @@ if(($_SESSION['loggedIn'] = true) && $_SESSION['role'] == "admin") {
     <body>
         <nav class="nav">
             <ul>
-                <li><a href="addinfo.php">Home</a></li>
+                <li><a href="regapproval.php">Home</a></li>
                 <li><a href="role.php">Roles</a></li>
                 <li><a href="employee.php">Employee</a></li>
                 <li><a href="patients.php">Patients</a></li>
-                <li><a href="regapproval.php">Registration Approval</a></li>
+                <li><a href="addinfo.php">Add Patient Info</a></li>
                 <li><a href="roster.php">Roster</a></li>
                 <li><a href="adminreport.php">Admin's Report</a></li>
             </ul>
         </nav>
-        <h1>Admin's Home</h1>
         <h2>Additional Information of Patient</h2>
 
         <!--show before entering data then the rest pops up after ID entered-->
@@ -77,6 +76,7 @@ if(($_SESSION['loggedIn'] = true) && $_SESSION['role'] == "admin") {
                 
                 $dataQuery = "UPDATE `patients` SET groupnum = '$group', admission_date = '$admission_date' WHERE patients.ID = '$patient_id';";
                 mysqli_query($conn,$dataQuery);
+                echo "Info has been added";
             }  
         ?> 
         <a href="logout.php">Logout</a>

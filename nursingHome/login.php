@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
             }
             if($_SESSION['role']== 'admin') {
                 
-                header("Location: addinfo.php");
+                header("Location: regapproval.php");
                 echo "you have logged in!";
             }
             if($_SESSION['role']== 'supervisor') {

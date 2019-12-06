@@ -3,9 +3,6 @@ include_once 'db.php';
 if (!$conn) {
     die("Connection failed: " . mysqli_error());
 }
-
-
-
 if (isset($_POST['register'])) {
     $role = $_POST['role'];
     $firstname = $_POST['firstname'];
@@ -14,12 +11,10 @@ if (isset($_POST['register'])) {
     $password = $_POST['password'];
     $phonenumber = $_POST['phonenumber'];
     $dob = $_POST['dob'];
-
     // if patient role is selected
     $familycode = $_POST['familycode'] ?? '';
     $econtactnum = $_POST['econtactnum'] ?? '';
     $familyrelation = $_POST['familyrelation'] ?? '';
-
     if (($role != '') && ($firstname != '') && ($lastname != '') && ($email != '') && ($password != '') && ($phonenumber != '') && ($dob != '')) {
         $insertUsers = "INSERT INTO `users` (role, firstname, lastname, email, password, phonenumber, dob) VALUES ('$role', '$firstname', '$lastname', '$email', '$password', '$phonenumber', '$dob')";
         mysqli_query($conn, $insertUsers); 
@@ -59,12 +54,8 @@ if (isset($_POST['register'])) {
         }
     }
 }
-
 mysqli_close($conn)
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="eng">
     <head>
@@ -111,7 +102,6 @@ mysqli_close($conn)
             }
         </script>
     </head>
-
     <body>
         <h2>Register</h2>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -156,5 +146,6 @@ mysqli_close($conn)
             <input type="submit" name="cancel" value="Cancel Registration">
             <a href="index.php">Back to Home</a>
         </form>
+        <a href="login.php">Login</a>
     </body>
 </html>
