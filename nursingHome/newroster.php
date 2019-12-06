@@ -24,90 +24,91 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SE
     </head>
     <body>
         <?php
-        if ($_SESSION['role'] =="supervisor"){
-        echo '<nav class="nav">';
-        echo    '<ul>';
-        echo       '<li><a href="roster.php">Home</a></li>';
-        echo     '<li><a href="newroster.php">New Roster</a></li>';
-        echo   '</ul>';
-        echo '</nav>';
+        if ($_SESSION['role'] == "supervisor"){
+            echo '<nav class="nav">';
+                echo '<ul>';
+                    echo '<li><a href="roster.php">Home</a></li>';
+                    echo '<li><a href="newroster.php">New Roster</a></li>';
+                echo '</ul>';
+            echo '</nav>';
         }
-        if ($_SESSION['role'] =="admin") {
-        echo   '<ul>';
-        echo   ' <li><a href="addinfo.php">Home</a></li>';
-        echo        '<li><a href="role.php">Roles</a></li>';
-        echo        '<li><a href="employee.php">Employee</a></li>';
-        echo        '<li><a href="patients.php">Patients</a></li>';
-        echo       '<li><a href="regapproval.php">Registration Approval</a></li>';
-        echo       '<li><a href="roster.php">Roster</a></li>';
-        echo        '<li><a href="adminreport.php">Admin Report</a></li>';
-        echo   '</ul>';
+        if ($_SESSION['role'] == "admin") {
+            echo '<ul>';
+                echo '<li><a href="addinfo.php">Home</a></li>';
+                echo '<li><a href="role.php">Roles</a></li>';
+                echo '<li><a href="employee.php">Employee</a></li>';
+                echo '<li><a href="patients.php">Patients</a></li>';
+                echo '<li><a href="regapproval.php">Registration Approval</a></li>';
+                echo '<li><a href="roster.php">Roster</a></li>';
+                echo '<li><a href="adminreport.php">Admin Report</a></li>';
+            echo '</ul>';
         }
         ?>
+
         <h1>Create New Roster</h1>
         <form action="" method="POST">
             <br><label>Date: </label><input type="text" name="date" /><br>
             <br><label>Supervisor</label>  
-            <select name="SUPERVISORDROPDOWN"><br>
+            <select name="supervisors"><br>
                 <option value=""></option>
                 <option value=""></option>
                 <option value=""></option>
                 <option value=""></option>
             </select><br>
             <label>Doctor</label>  
-            <select name="DOCTORDROPDOWN"><br>
+            <select name="doctors"><br>
                 <option value=""></option>
                 <option value=""></option>
                 <option value=""></option>
                 <option value=""></option>
             </select><br>
             <label>Caregiver1</label>  
-            <select name="CAREGIVER1DROPDOWN"><br>
+            <select name="cg-one"><br>
                 <option value=""></option>
                 <option value=""></option>
                 <option value=""></option>
                 <option value=""></option>
             </select>
-            <select name="CAREGIVER1DROPDOWN"><br>
+            <select name="cg-one-grp"><br>
                 <option value=""></option>
                 <option value=""></option>
                 <option value=""></option>
                 <option value=""></option>
             </select><br>
             <label>Caregiver2</label>  
-            <select name="CAREGIVER2DROPDOWN"><br>
+            <select name="cg-two"><br>
                 <option value=""></option>
                 <option value=""></option>
                 <option value=""></option>
                 <option value=""></option>
             </select>
-            <select name="CAREGIVER2DROPDOWN"><br>
+            <select name="cg-two-grp"><br>
                 <option value=""></option>
                 <option value=""></option>
                 <option value=""></option>
                 <option value=""></option>
             </select><br>
             <label>Caregiver3</label>  
-            <select name="CAREGIVER3DROPDOWN"><br>
+            <select name="cg-three"><br>
                 <option value=""></option>
                 <option value=""></option>
                 <option value=""></option>
                 <option value=""></option>
             </select>
-            <select name="CAREGIVER3DROPDOWN"><br>
+            <select name="cg-three-grp"><br>
                 <option value=""></option>
                 <option value=""></option>
                 <option value=""></option>
                 <option value=""></option>
             </select><br>
             <label>Caregiver4</label>  
-            <select name="CAREGIVER4DROPDOWN"><br>
+            <select name="cg-four"><br>
                 <option value=""></option>
                 <option value=""></option>
                 <option value=""></option>
                 <option value=""></option>
             </select>
-            <select name="CAREGIVER4DROPDOWN"><br>
+            <select name="cg-four-grp"><br>
                 <option value=""></option>
                 <option value=""></option>
                 <option value=""></option>

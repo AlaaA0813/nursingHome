@@ -24,7 +24,7 @@ if (isset($_POST['register'])) {
         $insertUsers = "INSERT INTO `users` (role, firstname, lastname, email, password, phonenumber, dob) VALUES ('$role', '$firstname', '$lastname', '$email', '$password', '$phonenumber', '$dob')";
         mysqli_query($conn, $insertUsers); 
     }
-    if (($role != 'patient') || ($role != 'Patient Family')) {
+    if (($role != 'patient') && ($role != 'family')) {
         $getUserID = "SELECT ID FROM `users` WHERE firstname='$firstname' AND lastname='$lastname' AND email='$email'";
         $result = mysqli_query($conn, $getUserID);
         $resultCheck = mysqli_num_rows($result);
@@ -154,6 +154,7 @@ mysqli_close($conn)
             <label>Relation to Emergency Contact: </label><input type="text" name="familyrelation" id="familyrelation" disabled="disabled" /><br>
             <input type="submit" name="register" value="Register Me">
             <input type="submit" name="cancel" value="Cancel Registration">
+            <a href="index.php">Back to Home</a>
         </form>
     </body>
 </html>

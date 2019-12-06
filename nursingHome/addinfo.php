@@ -49,7 +49,7 @@ if(($_SESSION['loggedIn'] = true) && $_SESSION['role'] == "admin") {
             //if entered number select name from users table and match the ID
             if (isset($_POST['grab_patient'])) {
                 $patient_id = $_POST['patient_id'];
-                $selectQuery = "SELECT users.firstname, users.lastname FROM users JOIN patients ON users.ID = patients.ID WHERE patients.ID = $patient_id;";
+                $selectQuery = "SELECT users.firstname, users.lastname FROM `users` JOIN `patients` ON users.ID = patients.ID WHERE patients.ID = '$patient_id';";
                 $result = mysqli_query($conn,$selectQuery);
                 $resultCheck = mysqli_fetch_assoc($result);
 

@@ -11,10 +11,10 @@
         <h1>Nursing Home Page</h1>
         <h2>Log in to an existing account or register as a new user.</h2>
 
-        <form action="">
+        <form action="login.php">
             <input type="submit" value="Go To Log In" class="button" />
         </form>
-        <form action="">
+        <form action="registration.php">
             <input type="submit" value="Go To Sign Up" class="button"/>
         </form>
     </body>

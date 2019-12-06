@@ -82,6 +82,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
             <label>Password: </label><input type="text" name="password" />
             <input type="submit" name="logIn" value="Log In" />
             <input type="submit" name="cancel" value="Cancel Login" />
+            <a href="index.php">Go to Home</a>
         </form>
     </body>
 </html>

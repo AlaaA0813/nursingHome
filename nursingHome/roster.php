@@ -23,41 +23,39 @@ if($_SESSION['loggedIn'] = true && $_SESSION['role'] == "caregiver" || $_SESSION
     <form action="" method="POST">
     <body>
         <?php
-        if ($_SESSION['role'] =="supervisor"){
-        echo '<nav class="nav">';
-        echo    '<ul>';
-        echo       '<li><a href="roster.php">Home</a></li>';
-        echo     '<li><a href="newroster.php">New Roster</a></li>';
-        echo   '</ul>';
-        echo '</nav>';
-        }
-        if ($_SESSION['role'] =="admin") {
-        echo   '<ul>';
-        echo   ' <li><a href="addinfo.php">Home</a></li>';
-        echo        '<li><a href="role.php">Roles</a></li>';
-        echo        '<li><a href="employee.php">Employee</a></li>';
-        echo        '<li><a href="patients.php">Patients</a></li>';
-        echo       '<li><a href="regapproval.php">Registration Approval</a></li>';
-        echo       '<li><a href="roster.php">Roster</a></li>';
-        echo        '<li><a href="adminreport.php">Admin Report</a></li>';
-        echo   '</ul>';
-        }
-        if ($_SESSION['role'] =="caregiver"){
-        echo   '<ul>';
-        echo      '<li><a href="carehome.php">Home</a></li>';
-        echo       '<li><a href="roster.php">Roster</a></li>';
-        echo    '</ul>';
-        }
-        if ($_SESSION['role'] =="doctor"){
-        echo   '<ul>';
-        echo       '<li><a href="doctorhome.php">Home</a></li>';
-        echo       '<li><a href="appointment.php">Appointments</a></li>';
-        echo        '<li><a href="patientofdoc.php">Your Patients</a></li>';
-        echo       '<li><a href="roster.php">Roster</a></li>';
-        echo    '</ul>';
-        }
-        
-
+            if ($_SESSION['role'] == "supervisor"){
+                echo '<nav class="nav">';
+                    echo '<ul>';
+                        echo '<li><a href="roster.php">Home</a></li>';
+                        echo '<li><a href="newroster.php">New Roster</a></li>';
+                    echo '</ul>';
+                echo '</nav>';
+            }
+            if ($_SESSION['role'] == "admin") {
+                echo '<ul>';
+                    echo '<li><a href="addinfo.php">Home</a></li>';
+                    echo '<li><a href="role.php">Roles</a></li>';
+                    echo '<li><a href="employee.php">Employee</a></li>';
+                    echo '<li><a href="patients.php">Patients</a></li>';
+                    echo '<li><a href="regapproval.php">Registration Approval</a></li>';
+                    echo '<li><a href="roster.php">Roster</a></li>';
+                    echo '<li><a href="adminreport.php">Admin Report</a></li>';
+                echo '</ul>';
+            }
+            if ($_SESSION['role'] == "caregiver"){
+                echo '<ul>';
+                    echo '<li><a href="carehome.php">Home</a></li>';
+                    echo '<li><a href="roster.php">Roster</a></li>';
+                echo '</ul>';
+            }
+            if ($_SESSION['role'] == "doctor"){
+            echo '<ul>';
+                echo '<li><a href="doctorhome.php">Home</a></li>';
+                echo '<li><a href="appointment.php">Appointments</a></li>';
+                echo '<li><a href="patientofdoc.php">Your Patients</a></li>';
+                echo '<li><a href="roster.php">Roster</a></li>';
+            echo '</ul>';
+            }
         ?>
         <h1>Roster</h1>
             <label>Date: </label><input type="text" name="date" />
