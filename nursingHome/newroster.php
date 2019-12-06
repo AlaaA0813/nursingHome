@@ -43,8 +43,8 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SE
                     echo '<li><a href="adminreport.php">Admin Report</a></li>';
                 echo '</ul>';
             }
-        ?>
 
+        ?>
         <h1>Create New Roster</h1>
         <form action="newroster.php" method="POST">
             <?php  
@@ -64,12 +64,14 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SE
                         } else {
                             echo "Error with roster." . mysqli_error($conn);
                         }
+
                     }
                 }
+            }
             ?>
             <br><label>Date: </label><input type="date" name="roster_date" /><br>
 
-            <br><label>Supervisor</label> 
+            <br><label>Supervisor</label>  
                 <select name="supervisor"><br>
                     <?php
                     /* fetch associative array */
@@ -132,10 +134,15 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SE
                             echo '<option value=" '.$row['ID'].' "> '.$row['firstname'].' </option>';     
                         }
                     ?>
+<<<<<<< HEAD
                 <br>
                 </select>
+=======
             <br>
-            <br><br>
+            </select>
+>>>>>>> a03f0e329930e916c28c51df9f0412124b0e9c4c
+            <br>
+            <br>
             <input type="submit" name="add" value="Add">
             <input type="submit" name="cancel" value="Cancel">
             <a href="logout.php">Logout</a>
