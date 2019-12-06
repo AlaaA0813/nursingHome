@@ -6,7 +6,7 @@ session_start();
 if (!$conn) {
     die("Connection failed: " . mysqli_error());
 }
-if(($_SESSION['loggedIn'] = true) && $_SESSION['role'] == "doctor") {
+if(($_SESSION['loggedIn'] = true) && $_SESSION['role'] == "supervisor") {
 } else {
     header("location: login.php");
 }
@@ -23,10 +23,9 @@ if(($_SESSION['loggedIn'] = true) && $_SESSION['role'] == "doctor") {
     <body>
         <nav class="nav">
             <ul>
-                <li><a href="doctorhome.php">Home</a></li>
+                <li><a href="roster.php">Home</a></li>
+                <li><a href="newroster.php"> New Roster</a></li>
                 <li><a href="appointment.php">Appointments</a></li>
-                <li><a href="patientofdoc.php">Your Patients</a></li>
-                <li><a href="roster.php">Roster</a></li>
             </ul>
         </nav>
         <h1>Appointments Page</h1>

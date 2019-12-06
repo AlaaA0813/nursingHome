@@ -28,6 +28,7 @@ if($_SESSION['loggedIn'] = true && $_SESSION['role'] == "caregiver" || $_SESSION
                     echo '<ul>';
                         echo '<li><a href="roster.php">Home</a></li>';
                         echo '<li><a href="newroster.php">New Roster</a></li>';
+                        echo '<li><a href="appointment.php">Appointments</a></li>';
                     echo '</ul>';
                 echo '</nav>';
             }
@@ -51,40 +52,90 @@ if($_SESSION['loggedIn'] = true && $_SESSION['role'] == "caregiver" || $_SESSION
             if ($_SESSION['role'] == "doctor"){
             echo '<ul>';
                 echo '<li><a href="doctorhome.php">Home</a></li>';
-                echo '<li><a href="appointment.php">Appointments</a></li>';
                 echo '<li><a href="patientofdoc.php">Your Patients</a></li>';
                 echo '<li><a href="roster.php">Roster</a></li>';
             echo '</ul>';
             }
         ?>
         <h1>Roster</h1>
-            <label>Date: </label><input type="text" name="date" />
+            <label>Date: </label>
+            <?php 
+            //current date
+        echo date("m/d/Y", time()); 
+      ?>
             <table>
-                <tr>
-                    <th>Supervisor</th>
-                    <th>Doctor</th>
-                    <th>Caregiver1</th>
-                    <th>Caregiver2</th>
-                    <th>Caregiver3</th>
-                    <th>Caregiver4</th>
-                </tr>
-                <tr>
-                    <td>Name</td>
-                    <td>Name</td>
-                    <td>Name</td>
-                    <td>Name</td>
-                    <td>Name</td>
-                    <td>Name</td>  
-                </tr>
-                <tr>
-                    <td>Patient Group</td>
-                    <td>Patient Group</td>
-                    <td>Patient Group</td>
-                    <td>Patient Group</td>
-                    <td>Patient Group</td>
-                    <td>Patient Group</td>
-                </tr>
-            </table>
+        <tr>
+            <th>Supervisor</th>
+            <th>Doctor</th>
+            <th>Caregiver1</th>
+            <th>Caregiver2</th>
+            <th>Caregiver3</th>
+            <th>Caregiver4</th>
+        </tr>
+        <tr> 
+<?php
+    // supevisor
+    $roster_date = date("Y/m/d", time()); 
+          $sql = mysqli_query($conn,"SELECT * FROM daily_roster, users WHERE users.ID = daily_roster.supervisor AND roster_date = '$roster_date'");
+              while($row = mysqli_fetch_array($sql)){
+                echo "
+                          <td name='name'>" . $row['firstname'] ." " . $row['lastname'] . "</td>
+                       ";
+                }
+        ?> 
+<?php
+    // doctor
+    $roster_date = date("Y/m/d", time()); 
+          $sql = mysqli_query($conn,"SELECT * FROM daily_roster, users WHERE users.ID = daily_roster.doctor AND roster_date = '$roster_date'");
+              while($row = mysqli_fetch_array($sql)){
+                echo "
+                          <td name='name'>" . $row['firstname'] ." " . $row['lastname'] . "</td>
+                        ";
+                }
+        ?>
+<?php
+  // caregiver1
+  $roster_date = date("Y/m/d", time()); 
+          $sql = mysqli_query($conn,"SELECT * FROM daily_roster, users WHERE users.ID = daily_roster.caregiver1 AND roster_date = '$roster_date'");
+              while($row = mysqli_fetch_array($sql)){
+                  echo "
+                          <td name='name'>"  . $row['firstname'] ." " . $row['lastname'] . "</td>
+                        ";
+                }
+        ?>
+<?php
+    // caregiver2
+    $roster_date = date("Y/m/d", time()); 
+          $sql = mysqli_query($conn,"SELECT * FROM daily_roster, users WHERE users.ID = daily_roster.caregiver2 AND roster_date = '$roster_date'");
+              while($row = mysqli_fetch_array($sql)){
+                  echo "
+                          <td name='name'>". $row['firstname'] ." " . $row['lastname'] . "</td>
+                        ";
+                }
+        ?>
+<?php
+    // caregiver3
+    $roster_date = date("Y/m/d", time()); 
+          $sql = mysqli_query($conn,"SELECT * FROM daily_roster, users WHERE users.ID = daily_roster.caregiver3 AND roster_date = '$roster_date'");
+              while($row = mysqli_fetch_array($sql)){
+                  echo "
+                          <td name='name'>". $row['firstname'] ." " . $row['lastname'] . "</td>
+                        ";
+                }
+        ?>
+<?php
+    // caregiver4
+    $roster_date = date("Y/m/d", time()); 
+          $sql = mysqli_query($conn,"SELECT * FROM daily_roster, users WHERE users.ID = daily_roster.caregiver4 AND roster_date = '$roster_date'");
+              while($row = mysqli_fetch_array($sql)){
+                  echo "
+                          <td name='name'>" . $row['firstname'] ." " . $row['lastname'] . "</td>
+                        ";
+                }
+        ?>
+      </tr>
+    </table>
+            
             <a href="logout.php">Logout</a>
         </form>
     </body>

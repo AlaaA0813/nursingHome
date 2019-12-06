@@ -29,6 +29,8 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SE
                     echo '<ul>';
                         echo '<li><a href="roster.php">Home</a></li>';
                         echo '<li><a href="newroster.php">New Roster</a></li>';
+                        echo '<li><a href="appointment.php">Appointments</a></li>';
+
                     echo '</ul>';
                 echo '</nav>';
             }
@@ -67,7 +69,6 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SE
 
                     }
                 }
-            }
             ?>
             <br><label>Date: </label><input type="date" name="roster_date" /><br>
 
@@ -134,13 +135,9 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SE
                             echo '<option value=" '.$row['ID'].' "> '.$row['firstname'].' </option>';     
                         }
                     ?>
-<<<<<<< HEAD
                 <br>
                 </select>
-=======
-            <br>
-            </select>
->>>>>>> a03f0e329930e916c28c51df9f0412124b0e9c4c
+
             <br>
             <br>
             <input type="submit" name="add" value="Add">

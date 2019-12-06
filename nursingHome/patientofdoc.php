@@ -24,7 +24,6 @@ if(($_SESSION['loggedIn'] = true) && $_SESSION['role'] == "doctor") {
         <nav class="nav">
             <ul>
                 <li><a href="doctorhome.php">Home</a></li>
-                <li><a href="appointment.php">Appointments</a></li>
                 <li><a href="patientofdoc.php">Your Patients</a></li>
                 <li><a href="roster.php">Roster</a></li>
             </ul>
