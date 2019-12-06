@@ -56,7 +56,7 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SE
                     $caregiver4 = $_POST['caregiver4'];
                     
                     if (($roster_date != '') && ($supervisor != '') && ($doctor != '') && ($caregiver1 != '') && ($caregiver2 != '') && ($caregiver3 != '') && ($caregiver4 != '')) {
-                        $insertRoster = "INSERT INTO daily_roster (roster_date, supervisor, doctor, caregiver1, caregiver2, caregiver3, caregiver4) VALUES ('$roster_date', '$supervisor', '$doctor', '$caregiver1', '$caregiver2', '$caregiver3, '$$caregiver4')";
+                        $insertRoster = "INSERT INTO `daily_roster` (roster_date, supervisor, doctor, caregiver1, caregiver2, caregiver3, caregiver4) VALUES ('$roster_date', '$supervisor', '$doctor', '$caregiver1', '$caregiver2', '$caregiver3, '$$caregiver4')";
                         mysqli_query($conn, $insertRoster); 
                         echo "Congratulations, you have made a roster";
                     } else {
@@ -70,7 +70,7 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SE
                 <select name="supervisor"><br>
                     <?php
                     /* fetch associative array */
-                    $result = mysqli_query($conn, "SELECT ID, firstname FROM users WHERE role = 'supervisor';");
+                    $result = mysqli_query($conn, "SELECT ID, firstname FROM `users` WHERE role = 'supervisor';");
                     while ($row = $result->fetch_assoc()){
                         echo '<option value=" '.$row['ID'].' "> '.$row['firstname'].' </option>';     
                     }
@@ -81,7 +81,7 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SE
             <label>Doctor</label>  
                 <select name="doctor">
                     <?php
-                        $result = mysqli_query($conn, "SELECT ID, firstname FROM users WHERE role = 'doctor';");
+                        $result = mysqli_query($conn, "SELECT ID, firstname FROM `users` WHERE role = 'doctor';");
                         while ($row = $result->fetch_assoc()){
                             echo '<option value=" '.$row['ID'].' "> '.$row['firstname'].' </option>';     
                         }
@@ -93,7 +93,7 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SE
             <label>Caregiver1</label>  
                 <select name="caregiver1">
                     <?php
-                        $result = mysqli_query($conn, "SELECT ID, firstname FROM users WHERE role = 'caregiver';");
+                        $result = mysqli_query($conn, "SELECT ID, firstname FROM `users` WHERE role = 'caregiver';");
                         while ($row = $result->fetch_assoc()){
                             echo '<option value=" '.$row['ID'].' "> '.$row['firstname'].' </option>';     
                         }
@@ -103,7 +103,7 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SE
             <label>Caregiver2</label> 
                 <select name="caregiver2">
                     <?php
-                    $result = mysqli_query($conn, "SELECT ID, firstname FROM users WHERE role = 'caregiver';");
+                    $result = mysqli_query($conn, "SELECT ID, firstname FROM `users` WHERE role = 'caregiver';");
                     while ($row = $result->fetch_assoc()){
                         echo '<option value=" '.$row['ID'].' "> '.$row['firstname'].' </option>';     
                     }
@@ -114,7 +114,7 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SE
             <label>Caregiver3</label>  
                 <select name="caregiver3">
                     <?php
-                    $result = mysqli_query($conn, "SELECT ID, firstname FROM users WHERE role = 'caregiver';");
+                    $result = mysqli_query($conn, "SELECT ID, firstname FROM `users` WHERE role = 'caregiver';");
                     while ($row = $result->fetch_assoc()){
                         echo '<option value=" '.$row['ID'].' "> '.$row['firstname'].' </option>';     
                     }
@@ -124,7 +124,7 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SE
             <label>Caregiver4</label> 
                 <select name="caregiver4">
                     <?php
-                    $result = mysqli_query($conn, "SELECT ID, firstname FROM users WHERE role = 'caregiver';");
+                    $result = mysqli_query($conn, "SELECT ID, firstname FROM `users` WHERE role = 'caregiver';");
                     while ($row = $result->fetch_assoc()){
                         echo '<option value=" '.$row['ID'].' "> '.$row['firstname'].' </option>';     
                     }
