@@ -24,27 +24,26 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SE
     </head>
     <body>
         <?php
-        if ($_SESSION['role'] == "supervisor"){
-            echo '<nav class="nav">';
-                echo '<ul>';
-                    echo '<li><a href="roster.php">Home</a></li>';
-                    echo '<li><a href="newroster.php">New Roster</a></li>';
-                echo '</ul>';
-            echo '</nav>';
+        if ($_SESSION['role'] =="supervisor"){
+        echo '<nav class="nav">';
+        echo    '<ul>';
+        echo       '<li><a href="roster.php">Home</a></li>';
+        echo     '<li><a href="newroster.php">New Roster</a></li>';
+        echo   '</ul>';
+        echo '</nav>';
         }
-        if ($_SESSION['role'] == "admin") {
-            echo '<ul>';
-                echo '<li><a href="addinfo.php">Home</a></li>';
-                echo '<li><a href="role.php">Roles</a></li>';
-                echo '<li><a href="employee.php">Employee</a></li>';
-                echo '<li><a href="patients.php">Patients</a></li>';
-                echo '<li><a href="regapproval.php">Registration Approval</a></li>';
-                echo '<li><a href="roster.php">Roster</a></li>';
-                echo '<li><a href="adminreport.php">Admin Report</a></li>';
-            echo '</ul>';
+        if ($_SESSION['role'] =="admin") {
+        echo   '<ul>';
+        echo   ' <li><a href="regapproval.php">Home</a></li>';
+        echo        '<li><a href="role.php">Roles</a></li>';
+        echo        '<li><a href="employee.php">Employee</a></li>';
+        echo        '<li><a href="patients.php">Patients</a></li>';
+        echo       '<li><a href="addinfo.php">Add Patient Info</a></li>';
+        echo       '<li><a href="roster.php">Roster</a></li>';
+        echo        '<li><a href="adminreport.php">Admin Report</a></li>';
+        echo   '</ul>';
         }
         ?>
-
         <h1>Create New Roster</h1>
         <form action="newroster.php" method="POST">
         <?php  if (isset($_POST['add'])) {
@@ -57,17 +56,19 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SE
                     $caregiver4 = $_POST['caregiver4'];
                     
                     if (($roster_date != '') && ($supervisor != '') && ($doctor != '') && ($caregiver1 != '') && ($caregiver2 != '') && ($caregiver3 != '') && ($caregiver4 != '')) {
-                        $insertRoster = "INSERT INTO `daily_roster` (roster_date, supervisor, doctor, caregiver1, caregiver2, caregiver3, caregiver4) VALUES ('$roster_date', '$supervisor', '$doctor', '$caregiver1', '$caregiver2', '$caregiver3, '$$caregiver4')";
-                        mysqli_query($conn, $insertRoster); 
+                        $insertRoster = "INSERT INTO `daily_roster` (roster_date, supervisor, doctor, caregiver1, caregiver2, caregiver3, caregiver4) VALUES ('$roster_date', '$supervisor', '$doctor', '$caregiver1', '$caregiver2', '$caregiver3', '$caregiver4')";
+                        
+                        if (mysqli_query($conn, $insertRoster)) { 
                         echo "Congratulations, you have made a roster";
                     } else {
                         echo "Error with roster." . mysqli_error($conn);
                     }
                 }
+            }
             ?>
             <br><label>Date: </label><input type="date" name="roster_date" /><br>
 
-            <br><label>Supervisor</label> 
+            <br><label>Supervisor</label>  
                 <select name="supervisor"><br>
                     <?php
                     /* fetch associative array */
@@ -131,10 +132,9 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SE
                     }
                     ?>
             <br>
->>>>>>> 98f9124051a9797f98c4e1f13568af82ea82de73
             </select>
             <br>
-            <br><br>
+            <br>
             <input type="submit" name="add" value="Add">
             <input type="submit" name="cancel" value="Cancel">
             <a href="logout.php">Logout</a>
