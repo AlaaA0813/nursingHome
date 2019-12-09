@@ -51,22 +51,52 @@
                     $patientID = $row['ID'];
                     $firstName = $row['firstname'];
                     $lastName = $row['lastname'];
+                    $i = 1;
+                    //$morning_med = $row['morning_med'];
+                    //$afternoon_med = $row['afternoon_med'];
+                   // $night_med = $row['night_med'];
+                   // $breakfast = $row['breakfast'];
+                   // $lunch = $row['lunch'];
+                   // $dinner = $row['dinner'];
             
-                    echo "<form action='' method='POST'>";
+                    echo "<form action='carehome.php' method='POST'>";
                         echo "<tr>";
-                            echo "<td name='fullname'>$firstName $lastName</td>
-                            <td><input type='checkbox' name='morningMed' /></td>
-                            <td><input type='checkbox' name='afternoonMed' /></td>
-                            <td><input type='checkbox' name='nightMed' /></td>
-                            <td><input type='checkbox' name='breakfast' /></td>
-                            <td><input type='checkbox' name='lunch' /></td>
-                            <td><input type='checkbox' name='dinner' /></td>";
+                            echo "<td name='fullname'>$firstName $lastName </td>";
+                            echo "<td><input type='checkbox' name='check_list[$i]' value='morning_med'/></td>";
+                            echo "<td><input type='checkbox' name='check_list[$i]' value='afternoon_med'/></td>";
+                            echo "<td><input type='checkbox' name='check_list[$i]' value='night_med'/></td>";
+                            echo "<td><input type='checkbox' name='check_list[$i]' value='breakfast'/></td>";
+                            echo "<td><input type='checkbox' name='check_list[$i]' value='lunch'/></td>";
+                           echo  "<td><input type='checkbox' name='check_list[$i]' value='dinner'/></td>";
                         echo "</tr>";
-                    echo "</form>";
+                        $i++;
                 }
-            }
-            echo "</table>";
-        ?>
+                        echo "</table>";
+                        echo "<input type='submit' name='add' value='add'/>";
+
+                    echo "</form>";
+
+                }
+            
+  
+                if (isset($_POST['add'])){
+                    if(isset($_POST['check_list'])) {
+                        $checked_count = count($_POST['check_list']);
+                        echo "You have selected following ".$checked_count." option(s): <br/>";
+                        // Loop to store and display values of individual checked checkbox.
+                        foreach($_POST['check_list'] as $selected) {
+                            echo "<p>".$selected ."</p>";
+                            $update = "UPDATE `daily_activities` SET morning_med=1, afternoon_med=1, night_med=1, breakfast=1, lunch=1, dinner=1 WHERE ID= '$selected'"; 
+                            mysqli_query($conn, $update);
+                            echo "congrats you did your tasks.";
+                        }
+                    } 
+                }
+                
+               //     header('Location: carehome.php');
+                
+            ?>
+       
         <a href="logout.php">Logout</a>
     </body>
 </html>
