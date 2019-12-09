@@ -31,7 +31,7 @@
         </nav>
         <h1>Cavegiver's Home</h1>
         <?php
-            $getPatientName = "SELECT ID, firstname, lastname FROM `users` WHERE role='patient'";
+            $getPatientName = "SELECT ID, firstname, lastname FROM `users` WHERE role='patient' AND is_approved=1";
             $result = mysqli_query($conn, $getPatientName);
             $resultCheck = mysqli_num_rows($result);
             

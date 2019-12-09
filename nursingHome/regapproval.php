@@ -68,7 +68,7 @@ if(($_SESSION['loggedIn'] = true) && $_SESSION['role'] == "admin") {
             if (isset($_POST['approve'])) {
                 if (isset($_POST['check'])) {
                     foreach ($_POST['check'] as $value) {
-                        $update = "UPDATE `users` SET is_approved='1' WHERE ID='$value'";
+                        $update = "UPDATE `users` SET is_approved=1 WHERE ID='$value'";
                         mysqli_query($conn, $update);
                     }
                 }
@@ -77,8 +77,8 @@ if(($_SESSION['loggedIn'] = true) && $_SESSION['role'] == "admin") {
             if (isset($_POST['remove'])) {
                 if (isset($_POST['check'])) {
                     foreach ($_POST['check'] as $value) {
-                        $delete = "DELETE FROM `users` WHERE ID='$value'";
-                        mysqli_query($conn, $delete);
+                        $deleteUser = "DELETE FROM `users` WHERE ID='$value'";
+                        mysqli_query($conn, $deleteUser); 
                     }
                 }
                 header('Location:  regapproval.php');

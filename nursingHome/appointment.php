@@ -6,7 +6,7 @@ session_start();
 if (!$conn) {
     die("Connection failed: " . mysqli_error());
 }
-if(($_SESSION['loggedIn'] = true) && $_SESSION['role'] == "supervisor") {
+if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor")) {
 } else {
     header("location: login.php");
 }
@@ -39,7 +39,7 @@ if(($_SESSION['loggedIn'] = true) && $_SESSION['role'] == "supervisor") {
             <?php
                 if (isset($_POST['grab_patient'])) {
                     $patient_id = $_POST['patient_id'];
-                    $selectQuery = "SELECT users.firstname, users.lastname FROM `users` JOIN `patients` ON users.ID = patients.ID WHERE patients.ID = '$patient_id';";
+                    $selectQuery = "SELECT users.firstname, users.lastname FROM `users` JOIN `patients` ON users.ID=patients.ID WHERE patients.ID='$patient_id' AND is_approved 1;";
                     $result = mysqli_query($conn,$selectQuery);
                     $resultCheck = mysqli_fetch_assoc($result);
                     $firstname = $resultCheck['firstname'];
@@ -55,7 +55,7 @@ if(($_SESSION['loggedIn'] = true) && $_SESSION['role'] == "supervisor") {
             <label>Doctor: </label>
             <select name="doctor">
                 <?php
-                    $getDoctorInfo = "SELECT ID, firstname, lastname FROM `users` WHERE role = 'doctor'";
+                    $getDoctorInfo = "SELECT ID, firstname, lastname FROM `users` WHERE role='doctor' AND is_approved=1";
                     $result = mysqli_query($conn, $getDoctorInfo);
                     $resultCheck = mysqli_num_rows($result);
                     if ($resultCheck > 0) {
@@ -88,6 +88,7 @@ if(($_SESSION['loggedIn'] = true) && $_SESSION['role'] == "supervisor") {
                         }
                     }
                 }
+                mysqli_close($conn)
             ?>
             <br>
             <a href="logout.php">Logout</a>
