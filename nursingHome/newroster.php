@@ -29,6 +29,8 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SE
                     echo '<ul>';
                         echo '<li><a href="roster.php">Home</a></li>';
                         echo '<li><a href="newroster.php">New Roster</a></li>';
+                        echo '<li><a href="appointment.php">Appointments</a></li>';
+
                     echo '</ul>';
                 echo '</nav>';
             }
@@ -125,15 +127,15 @@ if(($_SESSION['loggedIn'] = true) && ($_SESSION['role'] == "supervisor") || $_SE
                 <br>
                 </select>
             <label>Caregiver4</label> 
-                <select name="caregiver4">
-                    <?php
-                        $result = mysqli_query($conn, "SELECT ID, firstname FROM `users` WHERE role = 'caregiver';");
-                        while ($row = $result->fetch_assoc()){
-                            echo '<option value=" '.$row['ID'].' "> '.$row['firstname'].' </option>';     
-                        }
-                    ?>
-                <br>
-                </select>
+            <select name="caregiver4">
+                <?php
+                    $result = mysqli_query($conn, "SELECT ID, firstname FROM `users` WHERE role = 'caregiver';");
+                    while ($row = $result->fetch_assoc()){
+                        echo '<option value=" '.$row['ID'].' "> '.$row['firstname'].' </option>';     
+                    }
+                ?>
+            </select>
+            <br>
             <br>
             <br>
             <input type="submit" name="add" value="Add">
